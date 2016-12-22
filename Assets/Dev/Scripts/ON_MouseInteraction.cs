@@ -32,10 +32,18 @@ public class ON_MouseInteraction : MonoBehaviour {
                 if (pinger != null)
                     pinger.Ping(1);
             }
-
+            if (hitInfo.transform.gameObject.GetComponent<Trigger>() != null)
+            {
+                Trigger[] pingers = hitInfo.transform.gameObject.GetComponents<Trigger>();
+                if (pingers.Length > 0)
+                {
+                    for (int i = 0; i < pingers.Length; i++)
+                    {
+                        pingers[i].Ping();
+                    }
+                }
+            }
         }
-
-
     }
 }
 

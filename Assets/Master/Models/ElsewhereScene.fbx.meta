@@ -28,6 +28,7 @@ ModelImporter:
     100040: polySurface5
     100042: polySurface7
     100044: sainai:Mesh
+    100046: polySurface32
     400000: BG
     400002: chips
     400004: elsewhere_Mesh
@@ -51,6 +52,7 @@ ModelImporter:
     400040: polySurface5
     400042: polySurface7
     400044: sainai:Mesh
+    400046: polySurface32
     2300000: elsewhere_Mesh
     2300002: Mesh4
     2300004: polySurface1
@@ -70,6 +72,7 @@ ModelImporter:
     2300032: polySurface5
     2300034: polySurface7
     2300036: sainai:Mesh
+    2300038: polySurface32
     3300000: elsewhere_Mesh
     3300002: Mesh4
     3300004: polySurface1
@@ -89,6 +92,7 @@ ModelImporter:
     3300032: polySurface5
     3300034: polySurface7
     3300036: sainai:Mesh
+    3300038: polySurface32
     4300000: polySurface31
     4300002: polySurface13
     4300004: polySurface24
@@ -108,6 +112,7 @@ ModelImporter:
     4300032: elsewhere_Mesh
     4300034: sainai:Mesh
     4300036: Mesh4
+    4300038: polySurface32
     9500000: //RootNode
   materials:
     importMaterials: 1
