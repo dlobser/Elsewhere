@@ -9,6 +9,7 @@ public class SimpleTriggerDeathRay : SimpleTrigger
     float counter = 0;
     public GameObject sourceObject;
     public GameObject laserPrefab;
+    public GameObject soundObject;
     GameObject laser;
 
 
@@ -17,6 +18,8 @@ public class SimpleTriggerDeathRay : SimpleTrigger
         if (!triggered) { 
             triggered = true;
             laser = Instantiate(laserPrefab);
+            GameObject sound = Instantiate(soundObject);
+            sound.transform.position = this.transform.position;
             laser.transform.position = Vector3.Lerp(this.transform.position, sourceObject.transform.position, .5f);
             laser.transform.LookAt(sourceObject.transform.position);
             counter = laser.transform.localScale.x;
@@ -35,9 +38,9 @@ public class SimpleTriggerDeathRay : SimpleTrigger
             laser.transform.localScale = new Vector3(counter, counter, Vector3.Distance(sourceObject.transform.position, this.transform.position));
             yield return new WaitForSeconds(Time.deltaTime);
         }
-        Debug.Log(laser.name);
+        //Debug.Log(laser.name);
         //laser.SetActive(false);
-
+        Destroy(laser);
 
     }
 }
