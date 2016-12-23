@@ -37,6 +37,7 @@ public class ON_NodePingSimpleWire : ON_NodePing {
     {
         if (!pinged)
         {
+            pinged = true;
             pingers = new List<GameObject>();
             for (int i = 0; i < node.siblings.Count; i++)
             {
@@ -47,7 +48,8 @@ public class ON_NodePingSimpleWire : ON_NodePing {
                     p.GetComponent<AudioSource>().Play();
                     p.transform.parent = pingContainer.transform;
                     pingers.Add(p);
-                    p.transform.localScale = new Vector3(p.transform.localScale.x / pingAge, p.transform.localScale.y / pingAge, p.transform.localScale.z / pingAge);
+                    float newAge = Mathf.Max(1, pingAge);
+                    p.transform.localScale = new Vector3(p.transform.localScale.x / newAge, p.transform.localScale.y / newAge, p.transform.localScale.z / newAge);
                     StartCoroutine(PingAnimation(p, node.siblings[i]));
                 }
 
@@ -74,11 +76,11 @@ public class ON_NodePingSimpleWire : ON_NodePing {
     IEnumerator PingAnimation(GameObject pingGeo, ON_Node sibling)
     {
         float counter = 0;
-        float dist = Vector3.Distance(this.transform.position, sibling.transform.position);
+        float dist = Vector3.Distance(this.transform.localPosition, sibling.transform.localPosition);
         while (counter < 1)
         {
             counter += (Time.deltaTime *( pingSpeed/dist));
-            pingGeo.transform.position = Vector3.Lerp(this.transform.position, sibling.transform.position,(counter/1) * .5f);
+            pingGeo.transform.localPosition = Vector3.Lerp(this.transform.localPosition, sibling.transform.localPosition, (counter/1) * .5f);
             pingGeo.transform.LookAt(sibling.transform.position);
             pingGeo.transform.localScale = new Vector3(pingGeo.transform.localScale.x  , pingGeo.transform.localScale.y , dist * (counter/1) );
             yield return new WaitForSeconds(Time.deltaTime);

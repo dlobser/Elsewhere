@@ -16,6 +16,7 @@ public class ON_Node : MonoBehaviour {
     public bool ping;
 
     public bool showPing;
+
     void Awake () {
         siblings = new List<ON_Node>();
         siblingIndices = new List<int>();
@@ -25,10 +26,8 @@ public class ON_Node : MonoBehaviour {
     public void Animate()
     {
         if(showPing)
-        Debug.Log(ping);
         if (ping)
         {
-            
             Ping(1);
             ping = false;
         }
@@ -67,10 +66,11 @@ public class ON_Node : MonoBehaviour {
         if(displayGeometry!=null)
         {
             display = Instantiate(displayGeometry);
-            display.transform.position = Vector3.zero;
+            
             ON_Display disp = display.AddComponent<ON_Display>();
             disp.connectedNode = this;
             display.transform.parent = this.transform;
+            display.transform.localPosition = Vector3.zero;
         }
         this.transform.localPosition = pos;
     }

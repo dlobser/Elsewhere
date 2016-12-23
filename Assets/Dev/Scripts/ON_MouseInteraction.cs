@@ -27,7 +27,8 @@ public class ON_MouseInteraction : MonoBehaviour {
         bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
         if (hit)
         {
-            if (hitInfo.transform.gameObject.GetComponent<ON_Display>() != null) { 
+            if (hitInfo.transform.gameObject.GetComponent<ON_Display>() != null) {
+           
                 ON_Node pinger = hitInfo.transform.gameObject.GetComponent<ON_Display>().connectedNode;
                 if (pinger != null)
                     pinger.Ping(1);

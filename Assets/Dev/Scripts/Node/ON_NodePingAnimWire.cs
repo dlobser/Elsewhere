@@ -13,16 +13,12 @@ public class ON_NodePingAnimWire : ON_NodePing {
 
     GameObject nodeGeo;
 
-    //public float startScale;
-    //public float endScale;
-
-
     private void Start()
     {
         node = GetComponent<ON_Node>();
         nodeGeo = node.display;
-        pingSpeed *= node.pingSpeed;
-        timeToReset *= node.timeToReset;
+        pingSpeed = node.pingSpeed;
+        timeToReset = node.timeToReset;
         maxPingAge = node.maxPingAge;
     }
 
@@ -46,6 +42,7 @@ public class ON_NodePingAnimWire : ON_NodePing {
     {
         if (!pinged)
         {
+         
             pingAge++;
             pinged = true;
             pingers = new List<GameObject>();

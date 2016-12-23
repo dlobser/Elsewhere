@@ -72,7 +72,7 @@ public class ON_NodePingSimple : ON_NodePing {
     IEnumerator PingAnimation(ON_Node sibling)
     {
         float counter = 0;
-        float dist = Vector3.Distance(this.transform.position, sibling.transform.position);
+        float dist = Vector3.Distance(this.transform.localPosition, sibling.transform.localPosition);
 
         while (counter < 1)
         {

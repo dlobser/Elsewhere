@@ -45,7 +45,7 @@ public class ON_NodePingAnimPop : ON_NodePing {
     {
         if (!pinged)
         {
-            pingAge++;
+            //pingAge++;
             pinged = true;
             pingers = new List<GameObject>();
             for (int i = 0; i < node.siblings.Count; i++)
