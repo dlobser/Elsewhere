@@ -7,8 +7,8 @@ public class ON_NodePingAnimEmitParticles : ON_NodePing {
     ON_Node node;
     //public GameObject pinger;
     //List<GameObject> pingers;
-    public bool ping;
-    public int maxPingAge;
+    ////public bool ping;
+    //public int maxPingAge;
     int pingAge = 0;
 
     ParticleSystem[] particles;
@@ -40,7 +40,6 @@ public class ON_NodePingAnimEmitParticles : ON_NodePing {
 
     public override void Ping(int age)
     {
-        particles = node.display.GetComponentsInChildren<ParticleSystem>();
         pingAge = age;
         if(pingAge<maxPingAge)
             Ping();
@@ -59,6 +58,8 @@ public class ON_NodePingAnimEmitParticles : ON_NodePing {
 
     void ChangeEmission(float rate)
     {
+        particles = node.display.GetComponentsInChildren<ParticleSystem>();
+
         for (int i = 0; i < particles.Length; i++)
         {
             //particles[i].emissionRate = rate;
@@ -66,26 +67,26 @@ public class ON_NodePingAnimEmitParticles : ON_NodePing {
         }
     }
 
-    IEnumerator CountDownToReset()
-    {
+    //IEnumerator CountDownToReset()
+    //{
        
-        resetTimer = timeToReset;
-        //node.display.GetComponentInChildren<MeshRenderer>().material = mat;
-        while (resetTimer > 0)
-        {
-            resetTimer -= Time.deltaTime;
-            float eRate = Mathf.Lerp(rate, 0 , resetTimer / timeToReset);
+    //    resetTimer = timeToReset;
+    //    //node.display.GetComponentInChildren<MeshRenderer>().material = mat;
+    //    while (resetTimer > 0)
+    //    {
+    //        resetTimer -= Time.deltaTime;
+    //        float eRate = Mathf.Lerp(rate, 0 , resetTimer / timeToReset);
 
-            ChangeEmission(eRate);
-            //float scalar = Mathf.Lerp(endScale, startScale, resetTimer / timeToReset);
-            //nodeGeo.transform.localScale = new Vector3(scalar, scalar, scalar);
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-        ChangeEmission(0);
-        pinged = false;
-        pingAge = 0;
-        resetTimer = 0;
-    }
+    //        ChangeEmission(eRate);
+    //        //float scalar = Mathf.Lerp(endScale, startScale, resetTimer / timeToReset);
+    //        //nodeGeo.transform.localScale = new Vector3(scalar, scalar, scalar);
+    //        yield return new WaitForSeconds(Time.deltaTime);
+    //    }
+    //    ChangeEmission(0);
+    //    pinged = false;
+    //    pingAge = 0;
+    //    resetTimer = 0;
+    //}
 
  
 }

@@ -25,9 +25,7 @@ public class ON_Node : MonoBehaviour {
 
     public void Animate()
     {
-        if(showPing)
-        if (ping)
-        {
+        if (ping){
             Ping(1);
             ping = false;
         }
@@ -46,8 +44,7 @@ public class ON_Node : MonoBehaviour {
 
     public void Ping()
     {
-        for (int i = 0; i < nodePings.Length; i++)
-        {
+        for (int i = 0; i < nodePings.Length; i++){
             nodePings[i].Ping();
         }
     }
@@ -55,8 +52,7 @@ public class ON_Node : MonoBehaviour {
 
     public void Ping(int age)
     {
-        for (int i = 0; i < nodePings.Length; i++)
-        {
+        for (int i = 0; i < nodePings.Length; i++){
             nodePings[i].Ping(age);
         }
     }
@@ -66,9 +62,14 @@ public class ON_Node : MonoBehaviour {
         if(displayGeometry!=null)
         {
             display = Instantiate(displayGeometry);
-            
-            ON_Display disp = display.AddComponent<ON_Display>();
+
+            ON_Display disp;
+            if (display.GetComponent<ON_Display>()==null)
+                disp = display.AddComponent<ON_Display>();
+            else
+                disp = display.GetComponent<ON_Display>();
             disp.connectedNode = this;
+
             display.transform.parent = this.transform;
             display.transform.localPosition = Vector3.zero;
         }

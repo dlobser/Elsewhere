@@ -5,4 +5,5 @@ using UnityEngine;
 public class TriggerPrewarm : MonoBehaviour {
 
 	public virtual void Animate(float t) { }
+    public virtual void Reset() { }
 }

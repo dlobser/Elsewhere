@@ -7,8 +7,8 @@ public class ON_NodePingAnimColorNode : ON_NodePing {
     ON_Node node;
     //public GameObject pinger;
     //List<GameObject> pingers;
-    public bool ping;
-    public int maxPingAge;
+    //public bool ping;
+    //public int maxPingAge;
     int pingAge = 0;
 
     MeshRenderer[] mRends;
@@ -30,12 +30,12 @@ public class ON_NodePingAnimColorNode : ON_NodePing {
         nodeGeo = node.display;
        
 
-        //initialColor = sharedMat.color;
+        ////initialColor = sharedMat.color;
     }
 
     void Update()
     {
-        if (ping && resetTimer == 0)
+        if (ping && resetTimer == 0 )
         {
             Ping();
             ping = false;
@@ -44,7 +44,6 @@ public class ON_NodePingAnimColorNode : ON_NodePing {
 
     public override void Ping(int age)
     {
-        mRends = node.display.GetComponentsInChildren<MeshRenderer>();
         pingAge = age;
         if(pingAge<maxPingAge)
             Ping();
@@ -70,7 +69,8 @@ public class ON_NodePingAnimColorNode : ON_NodePing {
 
     IEnumerator CountDownToReset()
     {
-       
+        mRends = node.display.GetComponentsInChildren<MeshRenderer>();
+
         resetTimer = timeToReset;
         //node.display.GetComponentInChildren<MeshRenderer>().material = mat;
         while (resetTimer > 0)

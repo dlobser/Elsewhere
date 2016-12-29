@@ -59,7 +59,8 @@ public class ON_NodePingAnimScaleNodeGeo : ON_NodePing {
         {
             resetTimer -= Time.deltaTime;
             float scalar = Mathf.Lerp(endScale, startScale, resetTimer / timeToReset);
-            nodeGeo.transform.localScale = new Vector3(scalar, scalar, scalar);
+            if(nodeGeo!=null)
+                nodeGeo.transform.localScale = new Vector3(scalar, scalar, scalar);
             yield return new WaitForSeconds(Time.deltaTime);
         }
         pinged = false;

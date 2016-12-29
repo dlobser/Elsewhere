@@ -27,23 +27,28 @@ public class ON_MouseInteraction : MonoBehaviour {
         bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
         if (hit)
         {
-            if (hitInfo.transform.gameObject.GetComponent<ON_Display>() != null) {
-           
-                ON_Node pinger = hitInfo.transform.gameObject.GetComponent<ON_Display>().connectedNode;
-                if (pinger != null)
-                    pinger.Ping(1);
-            }
-            if (hitInfo.transform.gameObject.GetComponent<Trigger>() != null)
+            if (hitInfo.transform.gameObject.GetComponent<ON_Display>() != null)
             {
-                Trigger[] pingers = hitInfo.transform.gameObject.GetComponents<Trigger>();
-                if (pingers.Length > 0)
-                {
-                    for (int i = 0; i < pingers.Length; i++)
-                    {
-                        pingers[i].Ping();
-                    }
-                }
+                Trigger pinger = hitInfo.transform.gameObject.GetComponent<Trigger>();
+                Debug.Log(pinger);
+                if (pinger != null)
+                    pinger.Ping();
+
+                //ON_Node pinger = hitInfo.transform.gameObject.GetComponent<ON_Display>().connectedNode;
+                //if (pinger != null)
+                //    pinger.Ping(1);
             }
+            //if (hitInfo.transform.gameObject.GetComponent<Trigger>() != null)
+            //{
+            //    Trigger[] pingers = hitInfo.transform.gameObject.GetComponents<Trigger>();
+            //    if (pingers.Length > 0)
+            //    {
+            //        for (int i = 0; i < pingers.Length; i++)
+            //        {
+            //            pingers[i].Ping();
+            //        }
+            //    }
+            //}
         }
     }
 }

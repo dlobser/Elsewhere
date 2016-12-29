@@ -5,10 +5,11 @@ using UnityEngine;
 public class ON_NodePingSimple : ON_NodePing {
 
     ON_Node node;
-    public bool ping;
-    public int maxPingAge;
+    //public bool ping { get; set; }
+    //public int maxPingAge;
     int pingAge = 0;
     GameObject nodeGeo;
+    //public bool pingOnlyOne;
 
 
     private void Start()
@@ -44,6 +45,7 @@ public class ON_NodePingSimple : ON_NodePing {
             pingAge++;
             pinged = true;
             StartCoroutine(CountDownToReset());
+            //int which = (int) Random.Range(0, node.siblings.Count);
             for (int i = 0; i < node.siblings.Count; i++)
             {
                 if (!node.siblings[i].NodePingsAreActive())
@@ -51,7 +53,7 @@ public class ON_NodePingSimple : ON_NodePing {
                     StartCoroutine(PingAnimation(node.siblings[i]));
                 }
             }
-           
+
         }
     }
 
@@ -59,8 +61,7 @@ public class ON_NodePingSimple : ON_NodePing {
     {
        
         resetTimer = timeToReset;
-        while (resetTimer > 0)
-        {
+        while (resetTimer > 0){
             resetTimer -= Time.deltaTime;
             yield return new WaitForSeconds(Time.deltaTime);
         }
@@ -74,16 +75,10 @@ public class ON_NodePingSimple : ON_NodePing {
         float counter = 0;
         float dist = Vector3.Distance(this.transform.localPosition, sibling.transform.localPosition);
 
-        while (counter < 1)
-        {
+        while (counter < 1){
             counter += (Time.deltaTime * (pingSpeed / dist));
             yield return new WaitForSeconds(Time.deltaTime);
         }
-
-
         sibling.Ping(pingAge);
-
     }
-
-
 }

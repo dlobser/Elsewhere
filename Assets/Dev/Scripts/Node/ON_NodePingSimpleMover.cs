@@ -5,10 +5,12 @@ using UnityEngine;
 public class ON_NodePingSimpleMover : ON_NodePing {
 
     ON_Node node;
-    public GameObject pinger;
+    //public GameObject pinger;
     List<GameObject> pingers;
-    public bool ping;
-    public int maxPingAge;
+    public ON_ObjectPool pool;
+
+    ////public bool ping;
+    //public int maxPingAge;
     int pingAge = 0;
 
     GameObject nodeGeo;
@@ -43,7 +45,7 @@ public class ON_NodePingSimpleMover : ON_NodePing {
             {
                 if (!node.siblings[i].NodePingsAreActive())// !(node.siblings[i].GetComponent<ON_NodePing>().resetTimer > 0))
                 {
-                    GameObject p = Instantiate(pinger);
+                    GameObject p = pool.PoolInstantiate();// Instantiate(pinger);
                     //p.GetComponent<ChooseRandomAudio>().Choose();
                     //p.GetComponent<AudioSource>().Play();
                     p.transform.parent = pingContainer.transform;
@@ -92,8 +94,8 @@ public class ON_NodePingSimpleMover : ON_NodePing {
         }
 
 
-
-        Destroy(pingGeo);
+        pool.PoolDestroy(pingGeo);
+        //Destroy(pingGeo);
 
     }
 }

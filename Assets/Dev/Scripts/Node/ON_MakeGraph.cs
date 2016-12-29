@@ -43,6 +43,7 @@ public class ON_MakeGraph : MonoBehaviour {
             nodes[i].transform.parent = GraphParent.transform;
             nodes[i].transform.localPosition = Vector3.zero;
             nodes[i].Init(weldedMesh.vertices[i]);
+            nodes[i].gameObject.name = "Node_" + i;
            
         }
 
