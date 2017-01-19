@@ -23,7 +23,8 @@ public class ON_MakeGraph : MonoBehaviour {
         Weld.AutoWeld(weldedMesh, .001f, 15f);
         if (GraphParent == null)
             GraphParent = this.gameObject;
-        BuildGraph();
+//        BuildGraph();
+		StartCoroutine(instanceNodes());
 	}
 	
 	// Update is called once per frame
@@ -32,6 +33,35 @@ public class ON_MakeGraph : MonoBehaviour {
         {
             nodes[i].Animate();
         }
+	}
+
+	IEnumerator instanceNodes(){
+		for (int i = 0; i < weldedMesh.vertices.Length; i++)
+		{
+			nodes.Add(Instantiate(node));
+			nodes[i].transform.parent = GraphParent.transform;
+			nodes[i].transform.localPosition = Vector3.zero;
+			nodes[i].Init(weldedMesh.vertices[i]);
+			nodes[i].gameObject.name = "Node_" + i;
+			yield return null;
+
+		}
+		StartCoroutine (addNeighbors ());
+		yield return null;
+	}
+
+	IEnumerator addNeighbors(){
+		for (int i = 0; i < weldedMesh.triangles.Length; i+=3)
+		{
+			nodes[weldedMesh.triangles[i]].AddSibling(nodes, weldedMesh.triangles[i + 1]);
+			nodes[weldedMesh.triangles[i]].AddSibling(nodes, weldedMesh.triangles[i + 2]);
+			nodes[weldedMesh.triangles[i + 1]].AddSibling(nodes, weldedMesh.triangles[i]);
+			nodes[weldedMesh.triangles[i + 1]].AddSibling(nodes, weldedMesh.triangles[i + 2]);
+			nodes[weldedMesh.triangles[i + 2]].AddSibling(nodes, weldedMesh.triangles[i]);
+			nodes[weldedMesh.triangles[i + 2]].AddSibling(nodes, weldedMesh.triangles[i + 1]);
+			yield return null;
+		}
+		yield return null;
 	}
 
     void BuildGraph()

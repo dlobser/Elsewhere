@@ -8,7 +8,7 @@
 	}
 	SubShader
 	{
-		Tags { "RenderType"="Transparent" }
+		Tags { "RenderType"="Transparent" "Queue" = "Transparent"}
 		Blend One One
 		LOD 100
 
@@ -62,7 +62,7 @@
 				col *= pow(ring,_Data.y);// ((cos((i.color.x * 6.28) + _Data.x) - 1)*-.5);
 				col *= min(1.0, i.color.x * 10);
 				// apply fog
-				UNITY_APPLY_FOG(i.fogCoord, col);
+//				UNITY_APPLY_FOG(i.fogCoord, col);
 				return col * _Color;
 			}
 			ENDCG
