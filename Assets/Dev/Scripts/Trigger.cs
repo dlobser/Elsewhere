@@ -17,13 +17,15 @@ public class Trigger : MonoBehaviour {
 	void Start () {
         triggers = GetComponents<SimpleTrigger>();
         prewarms = GetComponents<TriggerPrewarm>();
-        node = GetComponent<ON_Display>().connectedNode;
+        if(GetComponent<ON_Display>()!=null)
+            node = GetComponent<ON_Display>().connectedNode;
 	}
 	
 	// Update is called once per frame
 	public void Ping () {
-        if(triggerable && !node.NodePingsAreActive())
-            pinged = true;
+        if(node!=null)
+            if(triggerable && !node.NodePingsAreActive())
+                pinged = true;
    	}
 
     private void Update()
@@ -45,7 +47,8 @@ public class Trigger : MonoBehaviour {
                         triggers[i].Ping();
 
                     }
-                    node.Ping();
+                    if(node!=null)
+                        node.Ping();
                     triggerable = false;
                 }
             }
