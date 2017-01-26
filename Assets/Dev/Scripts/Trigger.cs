@@ -23,16 +23,19 @@ public class Trigger : MonoBehaviour {
 	
 	// Update is called once per frame
 	public void Ping () {
-        if(node!=null)
-            if(triggerable && !node.NodePingsAreActive())
-                pinged = true;
+		if (node != null) {
+			if (triggerable && !node.NodePingsAreActive ())
+				pinged = true;
+		}
+		else if (triggerable)
+			pinged = true;
    	}
 
     private void Update()
     {
         if (pinged)
         {
-            Debug.Log("trigger");
+//            Debug.Log("trigger");
             if (triggerCounter < timeToTrigger)
             {
                 triggerCounter += Time.deltaTime;

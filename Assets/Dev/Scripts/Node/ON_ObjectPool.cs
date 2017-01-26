@@ -10,7 +10,7 @@ public class ON_ObjectPool : MonoBehaviour {
     public List<GameObject> pool;
     Vector3 scale;
 
-    void Start () {
+    void Awake () {
         pool = new List<GameObject>();
         scale = poolObject.transform.localScale;
         for (int i = 0; i < poolSize; i++)

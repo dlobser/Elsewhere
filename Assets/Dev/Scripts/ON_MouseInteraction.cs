@@ -12,11 +12,11 @@ public class ON_MouseInteraction : MonoBehaviour {
             RaycastHit hitInfo = new RaycastHit();
             bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
             if (hit) {
-                if (hitInfo.transform.gameObject.GetComponent<ON_Display>() != null) {
+//                if (hitInfo.transform.gameObject.GetComponent<ON_Display>() != null) {
                     Trigger pinger = hitInfo.transform.gameObject.GetComponent<Trigger>();
                     if (pinger != null)
                         pinger.Ping();
-                }
+//                }
 
             }
         }

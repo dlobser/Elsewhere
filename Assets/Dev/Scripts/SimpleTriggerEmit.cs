@@ -5,11 +5,12 @@ using UnityEngine;
 public class SimpleTriggerEmit : SimpleTrigger {
 
     public ParticleSystem parti;
+	public int amount;
 
     public override void Ping()
     {
         if(parti!=null)
-            parti.Emit(5);
+            parti.Emit(amount);
 
     }
     

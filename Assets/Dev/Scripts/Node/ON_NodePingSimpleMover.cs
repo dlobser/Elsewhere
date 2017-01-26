@@ -9,6 +9,9 @@ public class ON_NodePingSimpleMover : ON_NodePing {
     List<GameObject> pingers;
     public ON_ObjectPool pool;
 
+	public bool bounce = false;
+	public float bounceHeight = 0;
+	public float initialTrailRendererTime;
     ////public bool ping;
     //public int maxPingAge;
     int pingAge = 0;
@@ -48,7 +51,17 @@ public class ON_NodePingSimpleMover : ON_NodePing {
                     GameObject p = pool.PoolInstantiate();// Instantiate(pinger);
                     //p.GetComponent<ChooseRandomAudio>().Choose();
                     //p.GetComponent<AudioSource>().Play();
+					if (p.GetComponent<TrailRenderer> () != null) {
+						p.GetComponent<TrailRenderer> ().Clear ();
+
+						//						initialTrailRendererTime = p.GetComponent<TrailRenderer> ().time;
+						p.GetComponent<TrailRenderer> ().time = 0;
+					}
+					p.transform.position = this.transform.position;
                     p.transform.parent = pingContainer.transform;
+
+				
+
                     pingers.Add(p);
                     float newAge = Mathf.Max(1, pingAge);
                     //p.transform.localScale = new Vector3(p.transform.localScale.x / newAge, p.transform.localScale.y / newAge, p.transform.localScale.z / newAge);
@@ -76,23 +89,52 @@ public class ON_NodePingSimpleMover : ON_NodePing {
     }
 
     IEnumerator PingAnimation(GameObject pingGeo, ON_Node sibling)
-    {
-        float counter = 0;
-        float dist = Vector3.Distance(this.transform.localPosition, sibling.transform.localPosition);
-        float inScale = pingGeo.transform.localScale.x;
-        while (counter < 1)
-        {
-            counter += (Time.deltaTime *( pingSpeed/dist));
-            pingGeo.transform.localPosition = Vector3.Lerp(this.transform.localPosition, sibling.transform.localPosition, (counter/1));
-            pingGeo.transform.LookAt(sibling.transform.position);
-            float sc = ((Mathf.Cos(Mathf.PI * 2 * (counter / 1)) - 1) * -.5f);
-            sc *= inScale;
-            pingGeo.transform.localScale = new Vector3(sc, sc, sc);
+	{
+		float counter = 0;
+		float dist = Vector3.Distance (this.transform.localPosition, sibling.transform.localPosition);
+		float inScale = pingGeo.transform.localScale.x;
+		pingGeo.transform.LookAt (sibling.transform.position);
 
-            //pingGeo.transform.localScale = new Vector3(pingGeo.transform.localScale.x  , pingGeo.transform.localScale.y , dist * (counter/1) );
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
+		Vector3 newHeight = Vector3.zero;
 
+
+		if (pingGeo.GetComponent<TrailRenderer> () != null) {
+			pingGeo.GetComponent<TrailRenderer> ().time = initialTrailRendererTime;
+		}
+			
+		while (counter < 1) {
+			counter += (Time.deltaTime * (pingSpeed / dist));
+			pingGeo.transform.localPosition = Vector3.Lerp (this.transform.localPosition, sibling.transform.localPosition, (counter / 1));
+			float sc = Mathf.Sin (Mathf.PI * (counter / 1));// ((Mathf.Cos(Mathf.PI * 2 * (counter / 1)) - 1) * -.5f);
+			sc *= inScale;
+			pingGeo.transform.localScale = new Vector3 (sc, sc, sc);
+
+			if (bounce) {
+				newHeight.Set (0, sc * bounceHeight, 0);
+				pingGeo.transform.Translate (newHeight);
+			}
+
+			//pingGeo.transform.localScale = new Vector3(pingGeo.transform.localScale.x  , pingGeo.transform.localScale.y , dist * (counter/1) );
+			yield return new WaitForSeconds (Time.deltaTime);
+		}
+
+		if (pingGeo.GetComponent<TrailRenderer> () != null) {
+			counter = 0;
+			float width = pingGeo.GetComponent<TrailRenderer> ().widthMultiplier;
+			while (counter < 1) {
+				counter += (Time.deltaTime * (pingSpeed / dist));
+				pingGeo.GetComponent<TrailRenderer> ().time = (1 - counter) * initialTrailRendererTime;
+				pingGeo.GetComponent<TrailRenderer> ().widthMultiplier = (1 - counter) * width;
+				yield return new WaitForSeconds (Time.deltaTime);
+
+			}
+			pingGeo.GetComponent<TrailRenderer> ().widthMultiplier = width;
+		}
+	
+
+		if (pingGeo.GetComponent<TrailRenderer> () != null) {
+			pingGeo.GetComponent<TrailRenderer> ().Clear ();// .enabled = false;
+		}
 
         pool.PoolDestroy(pingGeo);
         //Destroy(pingGeo);

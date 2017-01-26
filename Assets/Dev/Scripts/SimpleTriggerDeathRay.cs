@@ -24,6 +24,9 @@ public class SimpleTriggerDeathRay : SimpleTrigger
             laser.transform.LookAt(sourceObject.transform.position);
             counter = laser.transform.localScale.x;
             laser.transform.localScale = new Vector3(counter, counter, Vector3.Distance(sourceObject.transform.position, this.transform.position));
+			this.GetComponent<MeshRenderer> ().enabled = false;
+			this.GetComponent<MeshCollider> ().enabled = false;
+
             StartCoroutine(Animate());
         }
     }

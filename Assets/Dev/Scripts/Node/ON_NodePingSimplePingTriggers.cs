@@ -13,6 +13,7 @@ public class ON_NodePingSimplePingTriggers : ON_NodePing {
 
     private void Start()
     {
+		simpleTriggers = GetComponents<SimpleTrigger> ();
         node = GetComponent<ON_Node>();
         pingSpeed = node.pingSpeed;
         maxPingAge = node.maxPingAge;

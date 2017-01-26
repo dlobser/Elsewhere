@@ -13,9 +13,9 @@ public class ON_Node : MonoBehaviour {
     public float pingSpeed;
     public float timeToReset;
     public int maxPingAge;
-    public bool ping;
+	public bool ping { get; set; }
 
-    public bool showPing;
+	public int id { get; set; }
 
     void Awake () {
         siblings = new List<ON_Node>();

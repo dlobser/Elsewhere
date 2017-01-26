@@ -9,6 +9,8 @@ public class ON_NodePingSimple : ON_NodePing {
     //public int maxPingAge;
     int pingAge = 0;
     GameObject nodeGeo;
+
+	public float neighborPingLikelihood;
     //public bool pingOnlyOne;
 
 
@@ -48,10 +50,12 @@ public class ON_NodePingSimple : ON_NodePing {
             //int which = (int) Random.Range(0, node.siblings.Count);
             for (int i = 0; i < node.siblings.Count; i++)
             {
-                if (!node.siblings[i].NodePingsAreActive())
+				
+				if ( !node.siblings[i].NodePingsAreActive() && Random.value < neighborPingLikelihood )
                 {
                     StartCoroutine(PingAnimation(node.siblings[i]));
                 }
+
             }
 
         }

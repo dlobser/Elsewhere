@@ -9,6 +9,8 @@ public class ON_MakeGraph : MonoBehaviour {
     Mesh weldedMesh;
     public ON_Node node;
     public GameObject GraphParent;
+
+	public bool exportMesh;
 	
     /*
      * create one node for each vertex
@@ -20,7 +22,10 @@ public class ON_MakeGraph : MonoBehaviour {
 	void Start () {
         nodes = new List<ON_Node>();
         weldedMesh = Weld.CopyMesh(mesh);
-        Weld.AutoWeld(weldedMesh, .001f, 15f);
+
+//		AssetDatabase.CreateAsset( [mesh object here], [path to asset] );
+//		AssetDatabase.SaveAssets();
+        Weld.AutoWeld(weldedMesh, .0000001f, 15f);
         if (GraphParent == null)
             GraphParent = this.gameObject;
 //        BuildGraph();
@@ -43,6 +48,7 @@ public class ON_MakeGraph : MonoBehaviour {
 			nodes[i].transform.localPosition = Vector3.zero;
 			nodes[i].Init(weldedMesh.vertices[i]);
 			nodes[i].gameObject.name = "Node_" + i;
+			nodes [i].id = i;
 			yield return null;
 
 		}
