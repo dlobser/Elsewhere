@@ -195,7 +195,7 @@
 //                    finalMix = float4(0, 0, 1, 1);
 //                #endif
 
-				return finalMix;
+				return i.color;
 			}
 			ENDCG
 		}

@@ -122,7 +122,7 @@ public class ON_NodePingSimpleMover : ON_NodePing {
 			counter = 0;
 			float width = pingGeo.GetComponent<TrailRenderer> ().widthMultiplier;
 			while (counter < 1) {
-				counter += (Time.deltaTime * (pingSpeed / dist));
+				counter += (Time.deltaTime * (pingSpeed / dist)) *.2f;
 				pingGeo.GetComponent<TrailRenderer> ().time = (1 - counter) * initialTrailRendererTime;
 				pingGeo.GetComponent<TrailRenderer> ().widthMultiplier = (1 - counter) * width;
 				yield return new WaitForSeconds (Time.deltaTime);

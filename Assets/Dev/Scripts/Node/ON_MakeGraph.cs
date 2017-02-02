@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using UnityEditor;
 
 public class ON_MakeGraph : MonoBehaviour {
 
@@ -11,6 +12,7 @@ public class ON_MakeGraph : MonoBehaviour {
     public GameObject GraphParent;
 
 	public bool exportMesh;
+    public bool weld = false;
 	
     /*
      * create one node for each vertex
@@ -21,15 +23,19 @@ public class ON_MakeGraph : MonoBehaviour {
 
 	void Start () {
         nodes = new List<ON_Node>();
-        weldedMesh = Weld.CopyMesh(mesh);
+        if(!weld)
+            weldedMesh = mesh;// Weld.CopyMesh(mesh);
+        else
+            weldedMesh = Weld.CopyMesh(mesh);
 
-//		AssetDatabase.CreateAsset( [mesh object here], [path to asset] );
-//		AssetDatabase.SaveAssets();
+        //AssetDatabase.CreateAsset(weldedMesh, "Assets/myMesh.mesh" );
+        //AssetDatabase.SaveAssets();
+
         Weld.AutoWeld(weldedMesh, .0000001f, 15f);
         if (GraphParent == null)
             GraphParent = this.gameObject;
-//        BuildGraph();
-		StartCoroutine(instanceNodes());
+        //        BuildGraph();
+        StartCoroutine(instanceNodes());
 	}
 	
 	// Update is called once per frame
