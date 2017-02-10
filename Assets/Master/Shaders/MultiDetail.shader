@@ -61,7 +61,7 @@
 				// sample the texture
 				fixed4 col = tex2D(_MainTex, i.uv);
 				fixed4 col2 = tex2D(_SecondTex, i.uv2);
-				fixed4 col3 = tex2D(_ThirdTex, i.uv3);
+				fixed4 col3 = tex2D(_ThirdTex, i.uv3+col2.rg*.2);
 				fixed4 ocol = col*col2*col3;
 				// apply fog
 				UNITY_APPLY_FOG(i.fogCoord, ocol);
