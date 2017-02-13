@@ -11,7 +11,9 @@ public class SimpleTriggerDeathRay : SimpleTrigger
     public GameObject laserPrefab;
     public GameObject soundObject;
     GameObject laser;
+    GameObject part;
 
+    public GameObject particlePrefab;
 
     public override void Ping()
     {
@@ -19,6 +21,9 @@ public class SimpleTriggerDeathRay : SimpleTrigger
             triggered = true;
             laser = Instantiate(laserPrefab);
             GameObject sound = Instantiate(soundObject);
+            part = Instantiate(particlePrefab);
+            part.transform.position = sourceObject.transform.position;
+            part.GetComponent<ParticleSystem>().Emit(40);
             sound.transform.position = this.transform.position;
             laser.transform.position = Vector3.Lerp(this.transform.position, sourceObject.transform.position, .5f);
             laser.transform.LookAt(sourceObject.transform.position);
@@ -44,6 +49,7 @@ public class SimpleTriggerDeathRay : SimpleTrigger
         //Debug.Log(laser.name);
         //laser.SetActive(false);
         Destroy(laser);
+        Destroy(part);
 
     }
 }

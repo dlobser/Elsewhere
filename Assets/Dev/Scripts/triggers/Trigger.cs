@@ -13,6 +13,8 @@ public class Trigger : MonoBehaviour {
     public ON_Node node;
     bool triggerable = true;
 
+    public bool neverTrigger = false;
+
 	// Use this for initialization
 	void Start () {
         triggers = GetComponents<SimpleTrigger>();
@@ -35,7 +37,6 @@ public class Trigger : MonoBehaviour {
     {
         if (pinged)
         {
-//            Debug.Log("trigger");
             if (triggerCounter < timeToTrigger)
             {
                 triggerCounter += Time.deltaTime;
@@ -43,12 +44,11 @@ public class Trigger : MonoBehaviour {
                     prewarms[i].Animate(triggerCounter / timeToTrigger);
                 }
             }
-            else if (triggerable) { 
+            else if (triggerable && !neverTrigger) { 
             {
                     for (int i = 0; i < triggers.Length; i++)
                     {
                         triggers[i].Ping();
-
                     }
                     if(node!=null)
                         node.Ping();
@@ -56,7 +56,7 @@ public class Trigger : MonoBehaviour {
                 }
             }
         }
-        else if (!pinged && triggerCounter>0) { 
+        else if (!pinged && triggerCounter>0) {
             triggerCounter -= Time.deltaTime;
             for (int i = 0; i < prewarms.Length; i++){
                 prewarms[i].Animate(triggerCounter / timeToTrigger);

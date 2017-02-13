@@ -31,13 +31,13 @@ public class ON_Node : MonoBehaviour {
         }
     }
 
-    public bool NodePingsAreActive()
-    {
+    public bool NodePingsAreActive() {
         bool running = false;
-        for (int i = 0; i < nodePings.Length; i++)
-        {
-            if (nodePings[i].pinged)
-                running = true;
+        if (nodePings!=null) { 
+            for (int i = 0; i < nodePings.Length; i++) {
+                if (nodePings[i].pinged)
+                    running = true;
+            }
         }
         return running;
     }

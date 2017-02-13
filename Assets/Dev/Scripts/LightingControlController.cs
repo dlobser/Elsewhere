@@ -7,7 +7,8 @@ public class LightingControlController : MonoBehaviour {
 	public LightingControl ctrl;
 
 	public Vector3 brightnessSpeed;
-
+    public Vector3 brightness;
+    public Vector3 saturation;
 	public Vector3 brightnessOffset;
 
 	public Vector3 hueSpeed;
@@ -27,9 +28,9 @@ public class LightingControlController : MonoBehaviour {
 			(Time.deltaTime * brightnessSpeed.z));
 		hueClock += new Vector3 (Time.deltaTime * hueSpeed.x, Time.deltaTime * hueSpeed.y, Time.deltaTime * hueSpeed.z);
 
-		ctrl.ColorR = Color.HSVToRGB (Noiser (hueClock.x), 1, Mathf.Pow(Noiser (brightnessOffset.x+brightnessClock.x),2));
-		ctrl.ColorG = Color.HSVToRGB (Noiser (hueClock.y), 1, Mathf.Pow(Noiser (brightnessOffset.y+brightnessClock.y),2));
-		ctrl.ColorB = Color.HSVToRGB (Noiser (hueClock.z), 1, Mathf.Pow(Noiser (brightnessOffset.z+brightnessClock.z),2));
+		ctrl.ColorR = Color.HSVToRGB (Noiser (hueClock.x), saturation.x, brightness.x + Mathf.Pow(Noiser (brightnessOffset.x+brightnessClock.x),2));
+		ctrl.ColorG = Color.HSVToRGB (Noiser (hueClock.y), saturation.y, brightness.y + Mathf.Pow(Noiser (brightnessOffset.y+brightnessClock.y),2));
+		ctrl.ColorB = Color.HSVToRGB (Noiser (hueClock.z), saturation.z, brightness.z + Mathf.Pow(Noiser (brightnessOffset.z+brightnessClock.z),2));
 	}
 
 	float Noiser(float i){
