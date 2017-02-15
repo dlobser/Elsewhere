@@ -73,7 +73,7 @@
 				// sample the texture
 				fixed4 col = tex2D(_MainTex, i.uv);
 				fixed4 col2 = tex2D(_MainTex2, i.uv2);
-				fixed4 col2b = tex2D(_MainTex2B, i.uv2);
+				fixed4 col2b = tex2D(_MainTex2B, i.uv2+ float2(_Time.x,_Time.z)) *9;
 				fixed4 col2c = lerp(col2,col2b,_Fader);
 				fixed4 col3 = tex2D(_MainTex3, i.uv3);
 				fixed4 colR = col.r*_ColorR*_ColorR.a*3;
@@ -83,7 +83,7 @@
 				fCol*=col2c*col3;
 				// apply fog
 				UNITY_APPLY_FOG(i.fogCoord, fCol);
-				return fCol+_Color;
+				return fCol+(_Color*sin(_Time.z*_Fader*10));
 			}
 			ENDCG
 		}

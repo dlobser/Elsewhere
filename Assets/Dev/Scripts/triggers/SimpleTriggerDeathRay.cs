@@ -20,11 +20,11 @@ public class SimpleTriggerDeathRay : SimpleTrigger
         if (!triggered) { 
             triggered = true;
             laser = Instantiate(laserPrefab);
-            GameObject sound = Instantiate(soundObject);
+//            GameObject sound = Instantiate(soundObject);
             part = Instantiate(particlePrefab);
 			part.transform.position = this.transform.position;
             part.GetComponent<ParticleSystem>().Emit(40);
-            sound.transform.position = this.transform.position;
+//            sound.transform.position = this.transform.position;
             laser.transform.position = Vector3.Lerp(this.transform.position, sourceObject.transform.position, .5f);
             laser.transform.LookAt(sourceObject.transform.position);
             counter = laser.transform.localScale.x;

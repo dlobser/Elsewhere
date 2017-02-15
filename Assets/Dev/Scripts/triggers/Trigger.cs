@@ -12,6 +12,8 @@ public class Trigger : MonoBehaviour {
     public TriggerPrewarm[] prewarms;
     public ON_Node node;
     bool triggerable = true;
+	public bool triggerOnlyOnce = false;
+	int triggerCount = 0;
 
     public bool neverTrigger = false;
 
@@ -26,10 +28,13 @@ public class Trigger : MonoBehaviour {
 	// Update is called once per frame
 	public void Ping () {
 		if (node != null) {
-			if (triggerable && !node.NodePingsAreActive ())
+			if (triggerable && !node.NodePingsAreActive ()&& !triggerOnlyOnce)
 				pinged = true;
-		}
-		else if (triggerable)
+			else if (triggerable && !node.NodePingsAreActive ()&& triggerOnlyOnce && triggerCount<1)
+				pinged = true;
+		} else if (triggerable && !triggerOnlyOnce)
+			pinged = true;
+		else if (triggerable && triggerOnlyOnce && triggerCount < 1)
 			pinged = true;
    	}
 
@@ -52,6 +57,7 @@ public class Trigger : MonoBehaviour {
                     }
                     if(node!=null)
                         node.Ping();
+					triggerCount++;
                     triggerable = false;
                 }
             }

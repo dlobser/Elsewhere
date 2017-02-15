@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimpleTriggerDeactivateOthers : SimpleTrigger {
+public class SimpleTriggerDeathrayOthers : SimpleTrigger {
 
     public float speed;
     float counter = 0;
@@ -24,7 +24,10 @@ public class SimpleTriggerDeactivateOthers : SimpleTrigger {
         }
 
         for (int i = 0; i < Objects.Length; i++) {
-            Objects[i].SetActive(false);
+			Objects[i].GetComponent<SimpleTriggerPlayAudios>().Ping();
+			Objects [i].GetComponent<SimpleTriggerDeathRay> ().Ping ();
+			yield return new WaitForSeconds (.1f);
+//            Objects[i].SetActive(false);
         }
         
     }
