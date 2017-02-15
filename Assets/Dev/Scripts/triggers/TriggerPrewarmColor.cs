@@ -11,11 +11,13 @@ public class TriggerPrewarmColor : TriggerPrewarm {
     Material mat;
     Material sharedMat;
 
+	public float power = 1f;
+
     public bool getRendererFromObject;
 
     public override void Animate(float t) {
         mat = rend.material;
-        mat.SetColor(channel, Color.Lerp(oldColor, newColor, t));
+        mat.SetColor(channel, Color.Lerp(oldColor, newColor, Mathf.Pow(t,power)));
     }
 
     public override void Reset()

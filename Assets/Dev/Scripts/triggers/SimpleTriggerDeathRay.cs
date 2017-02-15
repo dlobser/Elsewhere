@@ -22,7 +22,7 @@ public class SimpleTriggerDeathRay : SimpleTrigger
             laser = Instantiate(laserPrefab);
             GameObject sound = Instantiate(soundObject);
             part = Instantiate(particlePrefab);
-            part.transform.position = sourceObject.transform.position;
+			part.transform.position = this.transform.position;
             part.GetComponent<ParticleSystem>().Emit(40);
             sound.transform.position = this.transform.position;
             laser.transform.position = Vector3.Lerp(this.transform.position, sourceObject.transform.position, .5f);
