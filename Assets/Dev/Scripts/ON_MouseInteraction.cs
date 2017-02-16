@@ -5,19 +5,28 @@ using UnityEngine;
 public class ON_MouseInteraction : MonoBehaviour {
 
     public bool UseMouse;
-
+    public Vector3 hitPosition;
+    public Vector3 hitNormal;
+    public bool beenHit;
     void Update() {
 
         if (UseMouse) { 
             RaycastHit hitInfo = new RaycastHit();
             bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
+            beenHit = hit;
             if (hit) {
 //                if (hitInfo.transform.gameObject.GetComponent<ON_Display>() != null) {
                     Trigger pinger = hitInfo.transform.gameObject.GetComponent<Trigger>();
-                    if (pinger != null)
+                    hitPosition = hitInfo.point;
+                    hitNormal = hitInfo.normal;
+                if (pinger != null)
                         pinger.Ping();
 //                }
 
+            }
+            else {
+                hitPosition = Vector3.zero;
+                hitNormal = Vector3.zero;
             }
         }
 
@@ -27,13 +36,21 @@ public class ON_MouseInteraction : MonoBehaviour {
             Debug.DrawRay (cam.transform.position, cam.transform.forward, Color.green);
             bool hit = Physics.Raycast(new Ray(cam.transform.position, cam.transform.forward), out hitInfo, 1e9f);// ( Camera.main.ViewportPointToRay(new Vector3(.5f,.5f,0)), out hitInfo);
             //Debug.Log(hit);
+            beenHit = hit;
             if (hit) {
+           
                 if (hitInfo.transform.gameObject.GetComponent<Trigger>() != null) {
                     Trigger pinger = hitInfo.transform.gameObject.GetComponent<Trigger>();
+                    hitPosition = hitInfo.point;
+                    hitNormal = hitInfo.normal;
                     if (pinger != null)
                         pinger.Ping();
                 }
 
+            }
+            else {
+                hitPosition = Vector3.zero;
+                hitNormal = Vector3.zero;
             }
         }
     }
