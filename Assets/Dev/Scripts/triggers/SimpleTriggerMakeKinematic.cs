@@ -12,7 +12,7 @@ public class SimpleTriggerMakeKinematic : SimpleTrigger {
 			this.transform.parent.transform.GetChild(i).GetComponent<Rigidbody> ().isKinematic = false;
 		}
 //		this.GetComponent<Rigidbody> ().isKinematic = false;
-		this.GetComponent<Rigidbody> ().AddForce (Random.insideUnitSphere * force);
+		this.GetComponent<Rigidbody> ().AddForce (Vector3.up * force);
     }
 
 }

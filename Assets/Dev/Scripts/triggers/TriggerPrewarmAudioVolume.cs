@@ -17,7 +17,7 @@ public class TriggerPrewarmAudioVolume : TriggerPrewarm
     public override void Animate(float t)
     {
 
-        audi.volume = Mathf.Lerp(minVolume, maxVolume, t);
+		audi.volume = Mathf.Lerp(audi.volume, Mathf.Lerp(minVolume, maxVolume, t),.05f);
     }
 	public override void Reset()
 	{
