@@ -14,6 +14,7 @@ public class SimpleTriggerColorShared : SimpleTrigger {
 
 	void Start(){
 		oldColor = mat.GetColor(channel);
+
 	}
 
     public override void Ping()
@@ -22,6 +23,11 @@ public class SimpleTriggerColorShared : SimpleTrigger {
 		if(!triggered)
         	StartCoroutine(Animate());
     }
+
+	void OnApplicationQuit(){
+		mat.SetColor(channel,oldColor);
+
+	}
 
     IEnumerator Animate()
     {

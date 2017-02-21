@@ -6,6 +6,7 @@ public class Trigger : MonoBehaviour {
 
     //public bool;
     public float timeToTrigger = 0;
+	public float returnSpeedMultiply = 1;
     float triggerCounter = 0;
     public bool pinged;
     public SimpleTrigger[] triggers;
@@ -63,7 +64,7 @@ public class Trigger : MonoBehaviour {
             }
         }
         else if (!pinged && triggerCounter>0) {
-            triggerCounter -= Time.deltaTime;
+			triggerCounter -= Time.deltaTime * returnSpeedMultiply;
             for (int i = 0; i < prewarms.Length; i++){
                 prewarms[i].Animate(triggerCounter / timeToTrigger);
             }

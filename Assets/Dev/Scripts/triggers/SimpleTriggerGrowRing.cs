@@ -5,7 +5,6 @@ using UnityEngine;
 public class SimpleTriggerGrowRing : SimpleTrigger {
 
     public ON_ObjectPool pool;
-    public GameObject poolParent;
     public GameObject container;
     public float pingSpeed;
     GameObject ring;
