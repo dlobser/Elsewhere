@@ -6,6 +6,7 @@
 		_MainTex2 ("Texture", 2D) = "white" {}
 		_Color ("Color", Color) = (1,1,1,1)
 		_Color2 ("Color Lighten", Color) = (0,0,0,0)
+		_Color3("dark Lighten", Color) = (0,0,0,0)
 	}
 	SubShader
 	{
@@ -45,6 +46,7 @@
 			float4 _MainTex2_ST;
 			fixed4 _Color;
 			fixed4 _Color2;
+			fixed4 _Color3;
 			
 			v2f vert (appdata v)
 			{
@@ -65,6 +67,8 @@
 				fixed4 col2 = ((lerp(col, _Color2, _Color2.a)) + (i.color * col * 5 * float4(1, .5, 0, 0))) *_Color;
 				float overone = max(0.0,min(1.0,(1-i.uv.x)*1000000));
 				fixed4 col3 = lerp(colb,col2,overone);
+				fixed4 col4 = min(1.0, _Color3 + overone);
+				col3 *= col4;
 				// apply fog
 				UNITY_APPLY_FOG(i.fogCoord, col3);
 				return col3;// * overone;// ((lerp(col, _Color2, _Color2.a)) + (i.color * col * 5 * float4(1, .5, 0, 0))) *_Color;

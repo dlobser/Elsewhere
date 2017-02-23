@@ -6,6 +6,7 @@ public class LaserTheWorld : MonoBehaviour {
 
     public ON_MouseInteraction mouse;
     public GameObject trail;
+    GameObject Trail;
     public GameObject lazor;
     public GameObject[] sources;
     GameObject source;
@@ -19,10 +20,12 @@ public class LaserTheWorld : MonoBehaviour {
     Vector3 prevPosition;
     float counter;
     float avgDistance = 1;
+    float prevScale = 0;
 
     // Use this for initialization
     void Start () {
         privateLazor = Instantiate(lazor);
+        Trail = Instantiate(trail);
         init = new Vector3(0, -1e6f, 0);
     }
 	
@@ -33,23 +36,25 @@ public class LaserTheWorld : MonoBehaviour {
             counter = Mathf.Min(1,Mathf.Max(0,((avgDistance-.1f))));
             privateLazor.transform.position = Vector3.Lerp(mouse.hitPosition, source.transform.position, .5f);
             privateLazor.transform.LookAt(source.transform.position);
-            privateLazor.transform.localScale = new Vector3(counter*laserWidth, counter*laserWidth, Vector3.Distance(source.transform.position, mouse.hitPosition));
-            trail.transform.position = mouse.hitPosition;
-            trail.GetComponent<TrailRenderer>().widthMultiplier = counter * trailWidth;
-            trail.GetComponent<TrailRenderer>().time = counter * trailTime;
-            trail.GetComponent<ParticleSystem>().emissionRate = counter * particleAmount;
-
-
+            float scale = Vector3.Distance(source.transform.position, mouse.hitPosition);
+            privateLazor.transform.localScale = new Vector3(counter*laserWidth, counter*laserWidth,prevScale);
+            Trail.transform.position = mouse.hitPosition;
+            Trail.GetComponent<TrailRenderer>().widthMultiplier = counter * trailWidth;
+            Trail.GetComponent<TrailRenderer>().time = counter * trailTime;
+            Trail.GetComponent<ParticleSystem>().emissionRate = counter * particleAmount;
+            prevScale = scale;
+          
         }
         else if (counter > 0) {
             counter -= Time.deltaTime * fadeSpeed ;
-            privateLazor.transform.localScale = new Vector3(counter, counter, Vector3.Distance(source.transform.position, this.transform.position));
-            trail.GetComponent<TrailRenderer>().widthMultiplier = counter * trailWidth;
-            trail.GetComponent<TrailRenderer>().time = counter * trailTime ;
-            trail.GetComponent<ParticleSystem>().emissionRate = counter * particleAmount;
+            privateLazor.transform.localScale = new Vector3(counter * laserWidth, counter * laserWidth, prevScale);
+            Trail.GetComponent<TrailRenderer>().widthMultiplier = counter * trailWidth;
+            Trail.GetComponent<TrailRenderer>().time = counter * trailTime ;
+            Trail.GetComponent<ParticleSystem>().emissionRate = counter * particleAmount;
         }
         else {
             privateLazor.transform.position = init;
+            prevScale = 0;
         }
 
       

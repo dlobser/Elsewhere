@@ -16,10 +16,12 @@ public class Trigger : MonoBehaviour {
 	public bool triggerOnlyOnce = false;
 	int triggerCount = 0;
 
-    public bool neverTrigger = false;
 
-	// Use this for initialization
-	void Start () {
+    public bool neverTrigger = false;
+    public bool debug;
+
+    // Use this for initialization
+    void Start () {
         triggers = GetComponents<SimpleTrigger>();
         prewarms = GetComponents<TriggerPrewarm>();
         if(GetComponent<ON_Display>()!=null)
@@ -43,6 +45,9 @@ public class Trigger : MonoBehaviour {
     {
         if (pinged)
         {
+            if (debug) {
+               Debug.Log (this.gameObject.name);
+            }
             if (triggerCounter < timeToTrigger)
             {
                 triggerCounter += Time.deltaTime;

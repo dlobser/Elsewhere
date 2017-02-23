@@ -13,7 +13,10 @@ public class SimpleTriggerColorShared : SimpleTrigger {
 	bool triggered = false;
 
 	void Start(){
-		oldColor = mat.GetColor(channel);
+        if (mat != null)
+            oldColor = mat.GetColor(channel);
+        else
+            oldColor = Color.black;
 
 	}
 
@@ -25,7 +28,8 @@ public class SimpleTriggerColorShared : SimpleTrigger {
     }
 
 	void OnApplicationQuit(){
-		mat.SetColor(channel,oldColor);
+        if(mat!=null)
+		    mat.SetColor(channel,oldColor);
 
 	}
 
