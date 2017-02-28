@@ -1,17 +1,63 @@
 fileFormatVersion: 2
-guid: ae1402f337ffe074ca46e35fcac4af04
-timeCreated: 1482365388
-licenseType: Pro
+guid: 03073f26af9ec4d5cafc2ff9fb16ceb4
+timeCreated: 1488324473
+licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Mesh
+    100002: crystal_D_piece_1
+    100004: crystal_D_piece_10
+    100006: crystal_D_piece_12
+    100008: crystal_D_piece_14
+    100010: crystal_D_piece_16
+    100012: crystal_D_piece_18
+    100014: crystal_D_piece_20
+    100016: crystal_D_piece_3
+    100018: crystal_D_piece_6
+    100020: crystal_D_piece_8
     400000: //RootNode
-    400002: Mesh
-    2300000: Mesh
-    3300000: Mesh
-    4300000: Mesh
+    400002: crystal_D_piece_1
+    400004: crystal_D_piece_10
+    400006: crystal_D_piece_12
+    400008: crystal_D_piece_14
+    400010: crystal_D_piece_16
+    400012: crystal_D_piece_18
+    400014: crystal_D_piece_20
+    400016: crystal_D_piece_3
+    400018: crystal_D_piece_6
+    400020: crystal_D_piece_8
+    2300000: crystal_D_piece_1
+    2300002: crystal_D_piece_10
+    2300004: crystal_D_piece_12
+    2300006: crystal_D_piece_14
+    2300008: crystal_D_piece_16
+    2300010: crystal_D_piece_18
+    2300012: crystal_D_piece_20
+    2300014: crystal_D_piece_3
+    2300016: crystal_D_piece_6
+    2300018: crystal_D_piece_8
+    3300000: crystal_D_piece_1
+    3300002: crystal_D_piece_10
+    3300004: crystal_D_piece_12
+    3300006: crystal_D_piece_14
+    3300008: crystal_D_piece_16
+    3300010: crystal_D_piece_18
+    3300012: crystal_D_piece_20
+    3300014: crystal_D_piece_3
+    3300016: crystal_D_piece_6
+    3300018: crystal_D_piece_8
+    4300000: crystal_D_piece_1
+    4300002: crystal_D_piece_3
+    4300004: crystal_D_piece_6
+    4300006: crystal_D_piece_8
+    4300008: crystal_D_piece_10
+    4300010: crystal_D_piece_12
+    4300012: crystal_D_piece_14
+    4300014: crystal_D_piece_16
+    4300016: crystal_D_piece_18
+    4300018: crystal_D_piece_20
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -36,7 +82,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 100
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -74,7 +120,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
