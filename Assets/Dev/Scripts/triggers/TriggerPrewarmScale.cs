@@ -8,7 +8,7 @@ public class TriggerPrewarmScale : TriggerPrewarm
     public Vector3 scaleTo;
     public Vector3 scaleFrom;
 
-    void Awake() {
+    void Start() {
 //        scaleFrom = this.transform.localScale;
 		this.transform.localScale = scaleFrom;
 

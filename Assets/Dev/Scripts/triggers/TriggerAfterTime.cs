@@ -9,7 +9,7 @@ public class TriggerAfterTime : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Time.time > timeToTrigger) {
+		if (Time.timeSinceLevelLoad > timeToTrigger) {
 			this.GetComponent<Trigger> ().timeToTrigger = newTime;
 			this.GetComponent<Trigger> ().Ping ();
 		}

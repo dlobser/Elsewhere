@@ -8,7 +8,7 @@
 	}
 	SubShader
 	{
-		Tags { "RenderType"="Transparent" }
+		Tags { "RenderType"="Transparent" "Queue"="Transparent"}
 		LOD 100
 		Blend One One
 
@@ -53,6 +53,7 @@
 			{
 				// sample the texture
 				fixed4 col = tex2D(_MainTex, i.uv+float2(_Time.z*_Speed,_Time.z*_Speed));
+//				col-=.3;
 				col*=abs(sin(_Time.z*_Speed))*_Color*_Color.a*50*col;
 				// apply fog
 				UNITY_APPLY_FOG(i.fogCoord, col);

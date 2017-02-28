@@ -5,6 +5,8 @@ using UnityEngine;
 public class SimpleTriggerPlayAudios : SimpleTrigger {
 
 	public AudioSource[] audi;
+	public bool disableAfterPlay = false;
+	public bool randomizePitch = false;
 
     public override void Ping()
     {
@@ -14,8 +16,12 @@ public class SimpleTriggerPlayAudios : SimpleTrigger {
 //				playing = true;
 //		}
 //		if(!playing)
-			audi[(int)Mathf.Floor(Random.value*audi.Length)].Play ();
-		this.enabled = false;
+		int index = (int)Mathf.Floor(Random.value*audi.Length);
+		if(randomizePitch)
+			audi [index].pitch = Random.Range (.8f, 1.2f);
+		audi[index].Play ();
+		if(disableAfterPlay)
+			this.enabled = false;
     }
 
 }

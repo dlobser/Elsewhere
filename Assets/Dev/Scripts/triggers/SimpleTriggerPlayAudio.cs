@@ -5,12 +5,14 @@ using UnityEngine;
 public class SimpleTriggerPlayAudio : SimpleTrigger {
 
 	public AudioSource audi;
+	public bool disableAfterPlay = false;
 
     public override void Ping()
     {
-		if(!audi.isPlaying)
+//		if(!audi.isPlaying)
 			audi.Play ();
-		this.enabled = false;
+		if(disableAfterPlay)
+			this.enabled = false;
     }
 
 }

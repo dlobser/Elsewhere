@@ -44,6 +44,7 @@ public class ON_NodePingSimpleMover : ON_NodePing {
         {
             pinged = true;
             pingers = new List<GameObject>();
+//			Debug.Log (node);
             for (int i = 0; i < node.siblings.Count; i++)
             {
                 if (!node.siblings[i].NodePingsAreActive())// !(node.siblings[i].GetComponent<ON_NodePing>().resetTimer > 0))
@@ -57,6 +58,13 @@ public class ON_NodePingSimpleMover : ON_NodePing {
 						//						initialTrailRendererTime = p.GetComponent<TrailRenderer> ().time;
 						p.GetComponent<TrailRenderer> ().time = 0;
 					}
+					if (p.GetComponent<ChooseRandomAudio> () != null) {
+						p.GetComponent<ChooseRandomAudio> ().Choose ();
+					}
+					if (p.GetComponent<AudioSource> () != null) {
+						p.GetComponent<AudioSource> ().Play ();
+					}
+
 					p.transform.position = this.transform.position;
                     p.transform.parent = pingContainer.transform;
 

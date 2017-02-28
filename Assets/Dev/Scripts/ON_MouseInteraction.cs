@@ -7,6 +7,7 @@ public class ON_MouseInteraction : MonoBehaviour {
     public bool UseMouse;
     public Vector3 hitPosition;
     public Vector3 hitNormal;
+	public GameObject hitObject;
     public bool beenHit;
     void Update() {
 
@@ -19,6 +20,8 @@ public class ON_MouseInteraction : MonoBehaviour {
                     Trigger pinger = hitInfo.transform.gameObject.GetComponent<Trigger>();
                     hitPosition = hitInfo.point;
                     hitNormal = hitInfo.normal;
+					hitObject = hitInfo.collider.gameObject;
+//				Debug.Log (hitObject);
                 if (pinger != null)
                         pinger.Ping();
 //                }
@@ -27,6 +30,7 @@ public class ON_MouseInteraction : MonoBehaviour {
             else {
                 hitPosition = Vector3.zero;
                 hitNormal = Vector3.zero;
+				hitObject = null;
             }
         }
 

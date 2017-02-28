@@ -13,7 +13,8 @@ public class ON_MakeGraph : MonoBehaviour {
 
 	public bool exportMesh;
     public bool weld = false;
-	
+
+	public bool finishedBuilding { get; set; }
     /*
      * create one node for each vertex
      * loop through all faces
@@ -22,6 +23,7 @@ public class ON_MakeGraph : MonoBehaviour {
      * */
 
 	void Start () {
+		finishedBuilding = false;
         nodes = new List<ON_Node>();
         if(!weld)
             weldedMesh = mesh;// Weld.CopyMesh(mesh);
@@ -73,6 +75,7 @@ public class ON_MakeGraph : MonoBehaviour {
 			nodes[weldedMesh.triangles[i + 2]].AddSibling(nodes, weldedMesh.triangles[i + 1]);
 			yield return null;
 		}
+		finishedBuilding = true;
 		yield return null;
 	}
 
@@ -99,4 +102,8 @@ public class ON_MakeGraph : MonoBehaviour {
             nodes[weldedMesh.triangles[i + 2]].AddSibling(nodes, weldedMesh.triangles[i + 1]);
         }
     }
+
+	public List<ON_Node> GetNodeList(){
+		return nodes;
+	}
 }
