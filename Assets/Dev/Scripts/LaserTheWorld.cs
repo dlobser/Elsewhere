@@ -36,18 +36,20 @@ public class LaserTheWorld : MonoBehaviour {
 	void Update () {
         if (mouse.beenHit) {
             FindClosestSource();
-            counter = Mathf.Min(1,Mathf.Max(0,((avgDistance-.1f))));
-            privateLazor.transform.position = Vector3.Lerp(mouse.hitPosition, source.transform.position, .5f);
-            privateLazor.transform.LookAt(source.transform.position);
-            float scale = Vector3.Distance(source.transform.position, mouse.hitPosition);
-            privateLazor.transform.localScale = new Vector3(counter*laserWidth, counter*laserWidth,prevScale);
-            Trail.transform.position = mouse.hitPosition;
-            Trail.GetComponent<TrailRenderer>().widthMultiplier = counter * trailWidth;
-            Trail.GetComponent<TrailRenderer>().time = counter * trailTime;
-            Trail.GetComponent<ParticleSystem>().emissionRate = counter * particleAmount;
-            prevScale = scale;
-			aud.volume = counter;
-          
+            //Debug.Log(mouse.hitObject);
+            if (Vector3.Distance(source.transform.position, mouse.hitObject.transform.position)>1) {
+                counter = Mathf.Min(1, Mathf.Max(0, ((avgDistance - .1f))));
+                privateLazor.transform.position = Vector3.Lerp(mouse.hitPosition, source.transform.position, .5f);
+                privateLazor.transform.LookAt(source.transform.position);
+                float scale = Vector3.Distance(source.transform.position, mouse.hitPosition);
+                privateLazor.transform.localScale = new Vector3(counter * laserWidth, counter * laserWidth, prevScale);
+                Trail.transform.position = mouse.hitPosition;
+                Trail.GetComponent<TrailRenderer>().widthMultiplier = counter * trailWidth;
+                Trail.GetComponent<TrailRenderer>().time = counter * trailTime;
+                Trail.GetComponent<ParticleSystem>().emissionRate = counter * particleAmount;
+                prevScale = scale;
+                aud.volume = counter;
+            }
         }
         else if (counter > 0) {
             counter -= Time.deltaTime * fadeSpeed ;

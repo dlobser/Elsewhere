@@ -28,7 +28,7 @@ public class EW_FadeColor : MonoBehaviour {
         float count = 0;
 
         while (count < 1) {
-            Debug.Log(count);
+            //Debug.Log(count);
             count += Time.deltaTime * speed;
             newCol = Color.Lerp(color, initColor, count);
             mat.SetColor(channel, newCol);

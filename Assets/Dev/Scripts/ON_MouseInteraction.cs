@@ -37,8 +37,8 @@ public class ON_MouseInteraction : MonoBehaviour {
         else {
             RaycastHit hitInfo = new RaycastHit();
             Camera cam = Camera.main;
-            Debug.DrawRay (cam.transform.position, cam.transform.forward, Color.green);
-            bool hit = Physics.Raycast(new Ray(cam.transform.position, cam.transform.forward), out hitInfo, 1e9f);// ( Camera.main.ViewportPointToRay(new Vector3(.5f,.5f,0)), out hitInfo);
+            Debug.DrawRay (cam.transform.position, cam.transform.forward*1000f, Color.green);
+            bool hit = Physics.Raycast(new Ray(cam.transform.position, cam.transform.forward), out hitInfo, 1e6f);// ( Camera.main.ViewportPointToRay(new Vector3(.5f,.5f,0)), out hitInfo);
             //Debug.Log(hit);
             beenHit = hit;
             if (hit) {

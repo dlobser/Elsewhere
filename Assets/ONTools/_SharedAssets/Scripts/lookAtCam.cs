@@ -5,6 +5,7 @@ public class lookAtCam : MonoBehaviour {
 
 	public bool constrainY = false;
 	public float addRotation = 0;
+    public Vector3 addVec;
 	// Use this for initialization
 	void Start () {
 	
@@ -16,7 +17,7 @@ public class lookAtCam : MonoBehaviour {
 			transform.LookAt (Camera.main.transform.position);
 			if (constrainY)
 				transform.localEulerAngles = Vector3.Scale (transform.localEulerAngles, new Vector3 (0, 1, 0));
-			transform.Rotate (0, addRotation, 0);
+			transform.Rotate (addVec.x, addRotation+addVec.y, addVec.z);
 		}
 	}
 }

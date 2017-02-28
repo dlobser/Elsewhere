@@ -17,7 +17,7 @@ public class AddGraphNodesToLaserTheWorld : MonoBehaviour {
 	}
 
 	IEnumerator checkForFinished(){
-		Debug.Log (graph.finishedBuilding);
+		//Debug.Log (graph.finishedBuilding);
 		while (!graph.finishedBuilding) {
 			yield return null;
 		}
