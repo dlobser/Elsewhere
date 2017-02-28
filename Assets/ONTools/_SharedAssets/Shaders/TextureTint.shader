@@ -55,7 +55,7 @@
 			{
 				// sample the texture
 				fixed4 col = tex2D(_MainTex, i.uv);
-				fixed4 col2 = ((lerp(col, _Color2, _Color2.a)) + (i.color * col * 5 * float4(1, .5, 0, 0))) *_Color;
+				fixed4 col2 = ((lerp(col, _Color2, _Color2.a)) + (i.color * col * 5 )) *_Color;
 				// apply fog
 				UNITY_APPLY_FOG(i.fogCoord, col2);
 				return col2;// ((lerp(col, _Color2, _Color2.a)) + (i.color * col * 5 * float4(1, .5, 0, 0))) *_Color;

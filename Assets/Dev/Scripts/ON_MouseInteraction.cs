@@ -43,18 +43,20 @@ public class ON_MouseInteraction : MonoBehaviour {
             beenHit = hit;
             if (hit) {
            
-                if (hitInfo.transform.gameObject.GetComponent<Trigger>() != null) {
+                //if (hitInfo.transform.gameObject.GetComponent<Trigger>() != null) {
                     Trigger pinger = hitInfo.transform.gameObject.GetComponent<Trigger>();
                     hitPosition = hitInfo.point;
                     hitNormal = hitInfo.normal;
-                    if (pinger != null)
+                    hitObject = hitInfo.collider.gameObject;
+                if (pinger != null)
                         pinger.Ping();
-                }
+                //}
 
             }
             else {
                 hitPosition = Vector3.zero;
                 hitNormal = Vector3.zero;
+                hitObject = null;
             }
         }
     }

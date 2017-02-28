@@ -80,7 +80,8 @@ public class LaserTheWorld : MonoBehaviour {
                 which = i;
             }
         }
-        source = sources[which];
+        if(which<sources.Length-1)
+            source = sources[which];
     }
 
 	public void AddToSource(GameObject g){

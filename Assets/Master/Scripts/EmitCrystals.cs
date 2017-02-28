@@ -11,6 +11,7 @@ public class EmitCrystals : MonoBehaviour {
 	public float scaleMin;
 	public float scaleMax;
 	public GameObject container;
+    public float crystalDistance = 1;
 
 	public int maxCrystals;
 	int crystalAmount;
@@ -23,21 +24,23 @@ public class EmitCrystals : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (!mouse.hitPosition.Equals (Vector3.zero) && 
-			mouse.hitObject.GetComponent<Crystalizable>()!=null&&
-			crystalAmount<maxCrystals&&
-			Vector3.Distance(mouse.hitPosition, Camera.main.transform.position)>1) {
-			if (rate > 0 && counter == 0) {
-				float scale = Random.Range (scaleMin, scaleMax);
-				Vector3 scalar = new Vector3 (scale, scale, scale);
-				GameObject g = Instantiate (crystals [(int)(Random.value * (crystals.Length - 1))]);
-				g.transform.position = mouse.hitPosition;
-				g.transform.localEulerAngles = mouse.hitNormal * 360;
-				g.transform.localScale = scalar;
-				g.transform.SetParent (container.transform);
-				crystalAmount++;
-			}
-		}
+        if (mouse.hitObject != null) {
+            if (!mouse.hitPosition.Equals(Vector3.zero) &&
+                mouse.hitObject.GetComponent<Crystalizable>() != null &&
+                crystalAmount < maxCrystals &&
+                Vector3.Distance(mouse.hitPosition, Camera.main.transform.position) > crystalDistance) {
+                if (rate > 0 && counter == 0) {
+                    float scale = Random.Range(scaleMin, scaleMax);
+                    Vector3 scalar = new Vector3(scale, scale, scale);
+                    GameObject g = Instantiate(crystals[(int)(Random.value * (crystals.Length - 1))]);
+                    g.transform.position = mouse.hitPosition;
+                    g.transform.localEulerAngles = mouse.hitNormal * 360;
+                    g.transform.localScale = scalar;
+                    g.transform.SetParent(container.transform);
+                    crystalAmount++;
+                }
+            }
+        }
 		counter += Time.deltaTime*rate;
 
 		if (counter > 1)
