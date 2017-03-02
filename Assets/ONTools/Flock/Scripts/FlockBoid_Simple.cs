@@ -12,11 +12,13 @@ namespace Flock{
 			id = Random.value;
 		}
 
-		// Update is called once per frame
-		public override void Animate () {
-			this.transform.LookAt (target);
-			this.transform.position = Vector3.Lerp(this.transform.position, prevPos,lerpSpeed);
-			prevPos = target;
+        // Update is called once per frame
+        public override void Animate() {
+            if (this != null) { 
+            this.transform.LookAt(target);
+            this.transform.position = Vector3.Lerp(this.transform.position, prevPos, lerpSpeed);
+            prevPos = target;
+        }
 		}
 	}
 }

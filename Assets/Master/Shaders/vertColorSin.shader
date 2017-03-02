@@ -10,6 +10,7 @@
 	{
 		Tags { "RenderType"="Transparent" "Queue" = "Transparent"}
 		Blend One One
+		ZWrite Off
 		LOD 100
 
 		Pass

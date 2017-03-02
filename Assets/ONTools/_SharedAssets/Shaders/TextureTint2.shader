@@ -4,9 +4,10 @@
 	{
 		_MainTex ("Texture", 2D) = "white" {}
 		_MainTex2 ("Texture", 2D) = "white" {}
-		_Color ("Color", Color) = (1,1,1,1)
-		_Color2 ("Color Lighten", Color) = (0,0,0,0)
+		_Color("Color", Color) = (1,1,1,1)
+		_Color2("Color Lighten", Color) = (0,0,0,0)
 		_Color3("dark Lighten", Color) = (0,0,0,0)
+		_Tile("Tile",float) = 1
 	}
 	SubShader
 	{
@@ -47,6 +48,7 @@
 			fixed4 _Color;
 			fixed4 _Color2;
 			fixed4 _Color3;
+			float _Tile;
 			
 			v2f vert (appdata v)
 			{
@@ -62,7 +64,7 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				// sample the texture
-				fixed4 col = tex2D(_MainTex, i.uv);
+				fixed4 col = tex2D(_MainTex, i.uv*_Tile);
 				fixed4 colb = tex2D(_MainTex2, i.uv2+col.xy+float2(_Time.x,_Time.y));
 				fixed4 col2 = ((lerp(col, _Color2, _Color2.a)) + (i.color * col * 5 * float4(1, .5, 0, 0))) *_Color;
 				float overone = max(0.0,min(1.0,(1-i.uv.x)*1000000));

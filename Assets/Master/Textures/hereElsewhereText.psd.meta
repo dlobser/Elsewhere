@@ -1,11 +1,12 @@
 fileFormatVersion: 2
 guid: d14061158fffb44c58c4156d79d05511
-timeCreated: 1488222157
-licenseType: Free
+timeCreated: 1488419093
+licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
     21300000: hereElsewhereText_0
     21300002: hereElsewhereText_1
+    21300004: hereElsewhereText_2
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -100,9 +101,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1024
+        y: 725
         width: 2048
-        height: 1024
+        height: 565
       alignment: 9
       pivot: {x: 0.5, y: 0.30978262}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,10 +115,23 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2048
-        height: 1024
+        width: 2044
+        height: 725
       alignment: 9
       pivot: {x: 0.5, y: 0.7234299}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: hereElsewhereText_2
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 1311
+        width: 2004
+        height: 718
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

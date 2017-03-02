@@ -37,7 +37,9 @@ public class LaserTheWorld : MonoBehaviour {
         if (mouse.beenHit) {
             FindClosestSource();
             //Debug.Log(mouse.hitObject);
-            if (Vector3.Distance(source.transform.position, mouse.hitObject.transform.position)>1) {
+          
+            if (Vector3.Distance(source.transform.position, mouse.hitObject.transform.position)>1 && 
+                mouse.hitObject.GetComponent<EW_DontLaserMe>()==null) {
                 counter = Mathf.Min(1, Mathf.Max(0, ((avgDistance - .1f))));
                 privateLazor.transform.position = Vector3.Lerp(mouse.hitPosition, source.transform.position, .5f);
                 privateLazor.transform.LookAt(source.transform.position);

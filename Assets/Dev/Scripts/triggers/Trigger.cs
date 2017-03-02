@@ -14,7 +14,7 @@ public class Trigger : MonoBehaviour {
     public ON_Node node;
     bool triggerable = true;
 	public bool triggerOnlyOnce = false;
-	int triggerCount = 0;
+	public int triggerCount { get; set; }
 
 
     public bool neverTrigger = false;
@@ -22,6 +22,7 @@ public class Trigger : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        triggerCount = 0;
         triggers = GetComponents<SimpleTrigger>();
         prewarms = GetComponents<TriggerPrewarm>();
         if(GetComponent<ON_Display>()!=null)

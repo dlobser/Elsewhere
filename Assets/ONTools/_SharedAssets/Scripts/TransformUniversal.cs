@@ -249,9 +249,9 @@ public class TransformUniversal : MonoBehaviour {
 				Remap(Noise(scaleNoiseOffset.z+scaleNoiseCounter.z),0,1,scaleNoiseLowerBounds.z,scaleNoiseUpperBounds.z));
 		}
 
-		if(useInitialScale)
+		if(useInitialScale && doScale||doScaleOscillate||doScaleNoise)
 			transform.localScale = initialScale + scalar + scaleOscillate + scaleNoise;
-		else
+		else if(doScale || doScaleOscillate || doScaleNoise)
 			transform.localScale = scalar + scaleOscillate + scaleNoise;
 
 	}

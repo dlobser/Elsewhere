@@ -12,7 +12,7 @@ public class EW_ActivateAfterTime : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (Time.time > startTime && !started) {
+		if (Time.timeSinceLevelLoad > startTime && !started) {
 			for (int i = 0; i < colliders.Length; i++) {
 				colliders [i].enabled = true;
 			}

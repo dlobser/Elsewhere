@@ -11,8 +11,11 @@ public class EmitCrystals : MonoBehaviour {
 	public float scaleMin;
 	public float scaleMax;
 	public GameObject container;
+    public bool parentToTarget;
     public float crystalDistance = 1;
 
+    //public Vector3 max = Vector3.Max;
+    //public Vector3 min = Vector3.Min;
 	public int maxCrystals;
 	int crystalAmount;
 
@@ -36,7 +39,10 @@ public class EmitCrystals : MonoBehaviour {
                     g.transform.position = mouse.hitPosition;
                     g.transform.localEulerAngles = mouse.hitNormal * 360;
                     g.transform.localScale = scalar;
-                    g.transform.SetParent(container.transform);
+                    if (parentToTarget)
+                        g.transform.SetParent(mouse.hitObject.transform);
+                    else
+                        g.transform.SetParent(container.transform);
                     crystalAmount++;
                 }
             }

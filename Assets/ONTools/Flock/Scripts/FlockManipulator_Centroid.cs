@@ -51,7 +51,8 @@ namespace Flock{
 			for (int i = 0; i < targets.Count; i++) {
 				Vector3 newPos = controller.transform.localToWorldMatrix.MultiplyVector (targets [i]) + controller.transform.position;
 				populator.boids [i].target = newPos + getNoiseVec (populator.boids [i].initialPosition);
-				populator.boids [i].Animate ();
+                if(populator.boids!=null)
+				    populator.boids [i].Animate ();
 			}
 
 		}

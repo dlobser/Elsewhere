@@ -11,7 +11,10 @@ public class SimpleTriggerDeathrayOthers : SimpleTrigger {
 
     public override void Ping()
     {
-        StartCoroutine(Animate());
+        if (!triggered) {
+            StartCoroutine(Animate());
+            triggered = true;
+        }
     }
 
     IEnumerator Animate()

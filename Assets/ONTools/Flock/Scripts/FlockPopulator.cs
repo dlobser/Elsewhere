@@ -17,6 +17,7 @@ namespace Flock{
 			int w = 0;
 			for (int i = 0; i < manip.targets.Count; i++) {
 				FlockBoid b = Instantiate (boidPrefabs [w]);
+                b.transform.position = Vector3.one * 1e6f;
 				b.Init ();
 				boids.Add(b);
 				boids [i].gameObject.name = boidPrefabs [w].gameObject.name;

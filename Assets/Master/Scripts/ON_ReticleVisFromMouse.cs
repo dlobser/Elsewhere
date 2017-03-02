@@ -18,7 +18,7 @@ public class ON_ReticleVisFromMouse : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         float dist;
-        if(!mouse.hitPosition.Equals(Vector3.zero))
+        if(!mouse.hitPosition.Equals(Vector3.zero) && mouse.hitObject.GetComponent<EW_DontLaserMe>()==null)
             dist = Mathf.Max(.3f, Vector3.Distance(prevMouse, mouse.hitPosition));
         else
             dist = 0;
@@ -26,7 +26,8 @@ public class ON_ReticleVisFromMouse : MonoBehaviour {
         alpha += dist;
         alpha /= 102;
         col.a = alpha;
-        sprite.color = col;
+        if(sprite!=null)
+            sprite.color = col;
         prevMouse = mouse.hitPosition;
 	}
 }
