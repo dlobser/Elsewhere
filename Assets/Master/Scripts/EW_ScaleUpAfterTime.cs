@@ -18,7 +18,7 @@ public class EW_ScaleUpAfterTime : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Time.time > startTime && !started) {
+		if (Time.timeSinceLevelLoad > startTime && !started) {
 			StartCoroutine (scaleUp ());
 			started = true;
 		}

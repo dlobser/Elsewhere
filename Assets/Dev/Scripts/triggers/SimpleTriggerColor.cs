@@ -5,16 +5,18 @@ using UnityEngine;
 public class SimpleTriggerColor : SimpleTrigger {
 
     public Color newColor;
-    Color oldColor;
+    public Color oldColor;
+    public bool getOldColorFromMaterial = false;
     public string channel;
     public float speed;
     float counter = 0;
     Material mat;
-
+    public bool reverse = false;
     public override void Ping()
     {
         mat = this.GetComponent<MeshRenderer>().material;
-        oldColor = mat.GetColor(channel);
+        if(getOldColorFromMaterial)
+            oldColor = mat.GetColor(channel);
         StartCoroutine(Animate());
     }
 
@@ -24,7 +26,10 @@ public class SimpleTriggerColor : SimpleTrigger {
         while (counter < speed)
         {
             counter += Time.deltaTime;
-            mat.SetColor(channel,Color.Lerp(oldColor, newColor, counter / speed));
+            if(!reverse)
+                mat.SetColor(channel,Color.Lerp(oldColor, newColor, counter / speed));
+            else
+                mat.SetColor(channel, Color.Lerp(newColor, oldColor,  counter / speed));
             yield return new WaitForSeconds(Time.deltaTime);
         }
 

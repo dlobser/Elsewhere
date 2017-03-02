@@ -35,7 +35,7 @@ public class EmitCrystals : MonoBehaviour {
                 if (rate > 0 && counter == 0) {
                     float scale = Random.Range(scaleMin, scaleMax);
                     Vector3 scalar = new Vector3(scale, scale, scale);
-                    GameObject g = Instantiate(crystals[(int)(Random.value * (crystals.Length - 1))]);
+                    GameObject g = Instantiate(crystals[(int)(Random.value * (crystals.Length ))]);
                     g.transform.position = mouse.hitPosition;
                     g.transform.localEulerAngles = mouse.hitNormal * 360;
                     g.transform.localScale = scalar;
