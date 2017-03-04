@@ -6,6 +6,7 @@ public class AddGraphNodesToLaserTheWorld : MonoBehaviour {
 
 	public ON_MakeGraph graph;
 	public LaserTheWorld laser;
+	public LaserTheWorldLightning laserLightning;
 	// Use this for initialization
 	void Start () {
 		StartCoroutine (checkForFinished ());
@@ -23,7 +24,10 @@ public class AddGraphNodesToLaserTheWorld : MonoBehaviour {
 		}
 		List<ON_Node> nodes = graph.GetNodeList ();
 		for (int i = 0; i < nodes.Count; i++) {
-			laser.AddToSource (nodes [i].gameObject);
+			if(laser!=null)
+				laser.AddToSource (nodes [i].gameObject);
+			if(laserLightning!=null)
+				laserLightning.AddToSource (nodes [i].gameObject);
 		}
 	}
 }

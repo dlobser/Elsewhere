@@ -28,7 +28,7 @@ public class EW_ScaleUpAfterTime : MonoBehaviour {
 		float counter = 0;
 		while (counter < scaleTime) {
 			counter += Time.deltaTime;
-			this.transform.localScale = Vector3.Lerp (startScale, endScale, counter / scaleTime);
+			this.transform.localScale = Vector3.Lerp (startScale, endScale,Mathf.SmoothStep(0,1, counter / scaleTime));
 			yield return new WaitForSeconds (Time.deltaTime);
 		}
 
