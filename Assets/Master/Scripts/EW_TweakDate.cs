@@ -9,9 +9,10 @@ public class EW_TweakDate : MonoBehaviour {
 	public float date;
 	[Range(0,1)]
 	public float fade;
-	public float poop;
+    public AudioSource audi;
 	public TextMesh text;
 	Color col;
+    int prevD;
 	// Use this for initialization
 	void Start () {
 		
@@ -24,5 +25,8 @@ public class EW_TweakDate : MonoBehaviour {
 		text.color = col;
 		int d = (int)date;
 		text.text = d.ToString();
+        if (d != prevD)
+            audi.Play();
+        prevD = d;
 	}
 }
