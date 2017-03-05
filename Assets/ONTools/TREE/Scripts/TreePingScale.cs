@@ -9,8 +9,10 @@ namespace TREESharp{
 		public Vector3 scaleTo;
 		float counter = 0;
 		public float speed = 1;
+        public GameObject scalar;
+
 		void Start(){
-			init = this.transform.localScale;
+			init =scalar.transform.localScale;
 		}
 
 		public override void Ping(){
@@ -20,7 +22,7 @@ namespace TREESharp{
 		IEnumerator scale(){
 			while(counter<1){
 				counter += Time.deltaTime;
-				this.transform.localScale = Vector3.Lerp (scaleTo, init, counter);
+				scalar.transform.localScale = Vector3.Lerp (scaleTo, init, counter);
 				yield return new WaitForSeconds (Time.deltaTime * speed);
 			}
 			counter = 0;

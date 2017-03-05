@@ -9,13 +9,14 @@ public class SimpleTriggerMoveIntoPlace : SimpleTrigger {
     public float speed;
 	// Use this for initialization
 	void Start () {
-        initialPosition = this.transform.localPosition;
+      
 	}
     public override void Ping() {
         StartCoroutine(move());
     }
     IEnumerator move() {
         float counter = 0;
+        initialPosition = this.transform.localPosition;
         while (counter < speed) {
             counter += Time.deltaTime;
             this.transform.localPosition = Vector3.Lerp(initialPosition, endPosition, Mathf.SmoothStep(0,1, counter / speed));

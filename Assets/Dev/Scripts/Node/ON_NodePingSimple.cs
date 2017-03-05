@@ -45,17 +45,17 @@ public class ON_NodePingSimple : ON_NodePing {
         if (!pinged)
         {
             pingAge++;
-            pinged = true;
-            StartCoroutine(CountDownToReset());
-            //int which = (int) Random.Range(0, node.siblings.Count);
-            for (int i = 0; i < node.siblings.Count; i++)
-            {
-				
-				if ( !node.siblings[i].NodePingsAreActive() && Random.value < neighborPingLikelihood )
-                {
-                    StartCoroutine(PingAnimation(node.siblings[i]));
-                }
+            if (pingAge < maxPingAge) {
+                pinged = true;
+                StartCoroutine(CountDownToReset());
+                //int which = (int) Random.Range(0, node.siblings.Count);
+                for (int i = 0; i < node.siblings.Count; i++) {
 
+                    if (!node.siblings[i].NodePingsAreActive() && Random.value < neighborPingLikelihood) {
+                        StartCoroutine(PingAnimation(node.siblings[i]));
+                    }
+
+                }
             }
 
         }

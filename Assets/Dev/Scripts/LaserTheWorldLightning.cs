@@ -46,25 +46,27 @@ public class LaserTheWorldLightning: MonoBehaviour {
 	void Update () {
         if (mouse.beenHit) {
             FindClosestSource();
-            //Debug.Log(mouse.hitObject);
-          
-            if (Vector3.Distance(source.transform.position, 
-				mouse.hitObject.transform.position)>1 && 
-            mouse.hitObject.GetComponent<EW_DontLaserMe>()==null) {
-				start = source.transform.position;
-				end = mouse.hitPosition;
-                counter = Mathf.Min(1, Mathf.Max(0, ((avgDistance - .1f))));
-				updateLine (start, end, counter*laserWidth);
-//                privateLazor.transform.position = Vector3.Lerp(mouse.hitPosition, source.transform.position, .5f);
-//                privateLazor.transform.LookAt(source.transform.position);
-                float scale = Vector3.Distance(source.transform.position, mouse.hitPosition);
-//                privateLazor.transform.localScale = new Vector3(counter * laserWidth, counter * laserWidth, prevScale);
-                Trail.transform.position = mouse.hitPosition;
-                Trail.GetComponent<TrailRenderer>().widthMultiplier = counter * trailWidth;
-                Trail.GetComponent<TrailRenderer>().time = counter * trailTime;
-                Trail.GetComponent<ParticleSystem>().emissionRate = counter * particleAmount;
-                prevScale = scale;
-                aud.volume = counter;
+            Debug.Log(source);
+            if (source != null) {
+                if (Vector3.Distance(source.transform.position,
+                    mouse.hitObject.transform.position) > 1 &&
+                    mouse.hitObject.GetComponent<EW_DontLaserMe>() == null) {
+
+                    start = source.transform.position;
+                    end = mouse.hitPosition;
+                    counter = Mathf.Min(1, Mathf.Max(0, ((avgDistance - .1f))));
+                    updateLine(start, end, counter * laserWidth);
+                    //                privateLazor.transform.position = Vector3.Lerp(mouse.hitPosition, source.transform.position, .5f);
+                    //                privateLazor.transform.LookAt(source.transform.position);
+                    float scale = Vector3.Distance(source.transform.position, mouse.hitPosition);
+                    //                privateLazor.transform.localScale = new Vector3(counter * laserWidth, counter * laserWidth, prevScale);
+                    Trail.transform.position = mouse.hitPosition;
+                    Trail.GetComponent<TrailRenderer>().widthMultiplier = counter * trailWidth;
+                    Trail.GetComponent<TrailRenderer>().time = counter * trailTime;
+                    Trail.GetComponent<ParticleSystem>().emissionRate = counter * particleAmount;
+                    prevScale = scale;
+                    aud.volume = counter;
+                }
             }
         }
         else if (counter > 0) {
@@ -137,7 +139,8 @@ public class LaserTheWorldLightning: MonoBehaviour {
                 which = i;
             }
         }
-        if(which<sources.Length-1)
+        //Debug.Log(which);
+        if(which<=sources.Length-1)
             source = sources[which];
     }
 
