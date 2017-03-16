@@ -20,7 +20,8 @@ public class SimpleTriggerPlayAudios : SimpleTrigger {
             int index = (int)Mathf.Floor(Random.value * audi.Length);
             if (randomizePitch)
                 audi[index].pitch = Random.Range(.8f, 1.2f);
-            audi[index].Play();
+            if(audi[index]!=null)
+                audi[index].Play();
         }
         if (disableAfterPlay) {
             this.enabled = false;
