@@ -6,21 +6,30 @@ using TREESharp;
 public class EW_TreePingSimpleTrigger : SimpleTrigger {
 
     public float delay;
+	public bool pingable { get; set; }
 
+	void Start(){
+		pingable = true;
+	}
     public override void Ping() {
-        StartCoroutine(Traverse(this.gameObject));
+
+		if (pingable)
+			StartCoroutine (Traverse (this.gameObject));
+//		else
+//			StopCoroutine (Traverse (this.gameObject));
     }
 
     IEnumerator Traverse(GameObject Joint) {
-
         TREESharp.Joint J = Joint.GetComponent<TREESharp.Joint>();
         TREESharp.TreePing[] P = Joint.GetComponents<TREESharp.TreePing>();
 
         yield return new WaitForSeconds(delay);// * J.scalar.transform.lossyScale.y);
-
-        for (int i = 0; i < P.Length; i++) {
-            P[i].Ping();
-        }
+//		if (pingable) {
+			for (int i = 0; i < P.Length; i++) {
+			
+				P [i].Ping ();
+			}
+//		}
 
 
         if (J.childJoint != null)

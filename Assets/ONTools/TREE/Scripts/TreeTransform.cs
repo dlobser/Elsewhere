@@ -12,6 +12,7 @@ namespace TREESharp{
 		List<List<int[]>> SelectedJoints = new List<List<int[]>>();
 		GameObject root;
 		List<List<Vector3>> initialRotation = new List<List<Vector3>>();
+		List<List<Vector3>> initialPosition = new List<List<Vector3>>();
 
 		Vector3 sinRotate = Vector3.zero;
 		Vector3 sinScale = Vector3.zero;
@@ -19,6 +20,7 @@ namespace TREESharp{
 		Vector3 rotateOffset = Vector3.zero;
 		Vector3 rotate = Vector3.zero;
 		Vector3 scale = Vector3.one;
+		Vector3 position = Vector3.zero;
 
 		bool defaultsMade = false;
 
@@ -29,6 +31,10 @@ namespace TREESharp{
 				Transforms[i].Add ("rx", 0);
 				Transforms[i].Add ("ry", 0);
 				Transforms[i].Add ("rz", 0);
+
+				Transforms[i].Add ("tx", 0);
+				Transforms[i].Add ("ty", 0);
+				Transforms[i].Add ("tz", 0);
 
 				//offset rotation
 				Transforms[i].Add ("orx", 0);
@@ -173,19 +179,23 @@ namespace TREESharp{
 				//		}
 
 				initialRotation.Clear ();
+				initialPosition.Clear ();
 				SelectedJoints.Clear ();
 
 				for (int i = 0; i < joints.Length; i++) {
 
 					List<int[]> firstList = TREEUtils.makeList (joints [i], tree.GetComponent<TREE> ());
 					List<Vector3> initRotations = new List<Vector3> ();
+					List<Vector3> initPositions = new List<Vector3> ();
 
 					for (int p = 0; p < firstList.Count; p++) {
 						GameObject g = TREEUtils.findJoint (firstList [p], 0, root.transform.GetChild (0).gameObject);
 						initRotations.Add (g.transform.localEulerAngles);
+						initPositions.Add (g.transform.localPosition);
 					}
 
-					initialRotation.Add (initRotations);	
+					initialRotation.Add (initRotations);
+					initialPosition.Add (initPositions);
 					SelectedJoints.Add (firstList);
 
 					string[] arg = args [i].Split (new string[] { "," }, System.StringSplitOptions.None);
@@ -232,11 +242,13 @@ namespace TREESharp{
 						int jointOffset = g.GetComponent<Joint> ().offset;
 						int jointOffset2 = g.GetComponent<Joint> ().offset2;
 						Vector3 init = initialRotation [i] [j];
+						Vector3 initPosition = initialPosition [i] [j];
 
 						sinRotate = Vector3.zero;
 		             	noiseRotate = Vector3.zero;
 						rotateOffset = Vector3.zero;
 						sinScale = Vector3.zero;
+
 
 						rotate.Set(
 							Transforms[i]["rx"],
@@ -270,6 +282,18 @@ namespace TREESharp{
 							sinScale.Set (sinScale.x, sinScale.x, sinScale.x);
 						}
 
+						if (Transforms [i] ["tx"] != 0 || Transforms [i] ["ty"] != 0 || Transforms [i] ["tz"] != 0) {
+
+							position = new Vector3 (
+								Transforms [i] ["tx"],
+								Transforms [i] ["ty"], 
+								Transforms [i] ["tz"]);
+							g.transform.localPosition = initPosition+position;
+
+						}
+							
+
+
 						if (Transforms [i] ["length"] != 0) {
 							if (g.GetComponent<Joint> ().childJoint != null) {
 								float off;
@@ -283,7 +307,6 @@ namespace TREESharp{
 
 						rotateOffset.Set (Transforms [i] ["orx"] * timer, Transforms [i] ["ory"] * timer, Transforms [i] ["orz"] * timer);
 						g.transform.localEulerAngles = rotate+init+sinRotate+noiseRotate+rotateOffset;
-
 		//				g.transform.Rotate (rotateOffset.x,rotateOffset.y,rotateOffset.z);
 						scale.Set(Transforms [i] ["scale"] + Transforms [i] ["sx"],Transforms [i] ["scale"] + Transforms [i] ["sy"],Transforms [i] ["scale"] + Transforms [i] ["sz"]);
 						Vector3 overallScale = sinScale + scale;
