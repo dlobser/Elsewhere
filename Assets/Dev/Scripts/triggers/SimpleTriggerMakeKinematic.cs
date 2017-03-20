@@ -7,11 +7,18 @@ public class SimpleTriggerMakeKinematic : SimpleTrigger {
 	public float force;
     public ON_MouseInteraction mouse;
     public bool makeAllSiblingsKinematic = true;
+    public bool makeHigherSiblingsKinematic = false;
 
     public override void Ping() {
         if (makeAllSiblingsKinematic) { 
             for (int i = 0; i < this.transform.parent.transform.childCount; i++) {
                 this.transform.parent.transform.GetChild(i).GetComponent<Rigidbody>().isKinematic = false;
+            }
+        }
+        else if (makeHigherSiblingsKinematic) {
+            for (int i = 0; i < this.transform.parent.transform.childCount; i++) {
+                if(this.transform.parent.transform.GetChild(i).GetComponent<MeshFilter>().mesh.vertices[0].y>=this.GetComponent<MeshFilter>().mesh.vertices[0].y)
+                    this.transform.parent.transform.GetChild(i).GetComponent<Rigidbody>().isKinematic = false;
             }
         }
         else {

@@ -12,8 +12,9 @@ public class EmitCrystals : MonoBehaviour {
 	public float scaleMax;
 	public GameObject container;
     public bool parentToTarget;
+    public Vector3 randomRotation;
     public float crystalDistance = 1;
-
+    public float scaleUpSpeed = 10;
     //public Vector3 max = Vector3.Max;
     //public Vector3 min = Vector3.Min;
 	public int maxCrystals;
@@ -42,8 +43,9 @@ public class EmitCrystals : MonoBehaviour {
                         g = Instantiate(crystals[mouse.hitObject.GetComponent<Crystalizable>().type-1]);
 
                     g.transform.position = mouse.hitPosition;
-                    g.transform.localEulerAngles = mouse.hitNormal * 360;
-                    g.transform.localScale = scalar;
+                    g.transform.localEulerAngles = (mouse.hitNormal * 360) + (Vector3.Scale( Random.insideUnitSphere,randomRotation));
+                    //g.transform.localScale = scalar;
+                    StartCoroutine(scaleUp(scalar, g));
                     if (parentToTarget)
                         g.transform.SetParent(mouse.hitObject.transform);
                     else
@@ -57,4 +59,19 @@ public class EmitCrystals : MonoBehaviour {
 		if (counter > 1)
 			counter = 0;
 	}
+
+    IEnumerator scaleUp(Vector3 scale, GameObject g) {
+        float count = 0;
+        g.transform.localScale = Vector3.zero;
+        Crystalizable c = g.GetComponent<Crystalizable>();
+        if (c != null)
+            c.enabled = false;
+        while (count < 1) {
+            count += Time.deltaTime * scaleUpSpeed;
+            g.transform.localScale = Vector3.Lerp(Vector3.zero, scale, Mathf.SmoothStep(0f,1f, count));
+            yield return null;
+        }
+        if (c != null)
+            c.enabled = true;
+    }
 }

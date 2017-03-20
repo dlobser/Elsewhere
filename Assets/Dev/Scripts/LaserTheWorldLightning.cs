@@ -46,7 +46,7 @@ public class LaserTheWorldLightning: MonoBehaviour {
 	void Update () {
         if (mouse.beenHit) {
             FindClosestSource();
-            //Debug.Log(source);
+            //Debug.Log(mouse.hitObject);
             if (source != null) {
                 if (Vector3.Distance(source.transform.position,
                     mouse.hitObject.transform.position) > 1 &&
