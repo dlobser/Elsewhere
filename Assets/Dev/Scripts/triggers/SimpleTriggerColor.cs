@@ -30,6 +30,7 @@ public class SimpleTriggerColor : SimpleTrigger {
                 mat.SetColor(channel,Color.Lerp(oldColor, newColor, counter / speed));
             else
                 mat.SetColor(channel, Color.Lerp(newColor, oldColor,  counter / speed));
+            //Debug.Log(counter); 
             yield return new WaitForSeconds(Time.deltaTime);
         }
 

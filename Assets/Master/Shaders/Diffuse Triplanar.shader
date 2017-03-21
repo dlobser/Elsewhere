@@ -11,6 +11,7 @@ Shader "Destruction/Diffuse - Triplanar"
 
 		_SideScale		("Side Scale", Vector)				= (0.5, 0.5, 0.5, 0.5)
 		_TopScale		("Top Scale", Vector)				= (0.5, 0.5, 0.5, 0.5)
+		_EmissionColor	("Emission", Color) = (0,0,0,0)
 	}
 	SubShader 
 	{
@@ -27,6 +28,7 @@ Shader "Destruction/Diffuse - Triplanar"
 		float _BlendFactor;
 		float4 _SideScale;
 		float4 _TopScale;
+		float4 _EmissionColor;
 
 		struct Input 
 		{
@@ -57,6 +59,7 @@ Shader "Destruction/Diffuse - Triplanar"
 			o.Albedo = lerp(o.Albedo, x, projNormal.x);
 			o.Albedo = lerp(o.Albedo, y, projNormal.y);
 			o.Albedo *= _Colour;
+			o.Emission = _EmissionColor;
 		}
 
 		ENDCG
