@@ -36,8 +36,8 @@ public class LaserTheWorld : MonoBehaviour {
 	void Update () {
         if (mouse.beenHit) {
             FindClosestSource();
-            Debug.Log(mouse.hitObject);
-            if (source != null) {
+            //Debug.Log(mouse.hitObject);
+            if (source != null && source.activeInHierarchy) {
                 if (Vector3.Distance(source.transform.position, mouse.hitObject.transform.position) > 1 &&
                     mouse.hitObject.GetComponent<EW_DontLaserMe>() == null) {
                     counter = Mathf.Min(1, Mathf.Max(0, ((avgDistance - .1f))));
