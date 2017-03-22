@@ -45,6 +45,7 @@ public class EmitCrystals : MonoBehaviour {
                     g.transform.position = mouse.hitPosition;
                     g.transform.localEulerAngles = (mouse.hitNormal * Mathf.PI * 2 * 360) + (Vector3.Scale( Random.insideUnitSphere,randomRotation));
                     //g.transform.localScale = scalar;
+                    Debug.Log(g);
                     StartCoroutine(scaleUp(scalar, g));
                     if (parentToTarget)
                         g.transform.SetParent(mouse.hitObject.transform);

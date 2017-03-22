@@ -11,7 +11,8 @@ public class EW_ScaleDownAndDestroy : MonoBehaviour {
 	}
 
 	IEnumerator scalar() {
-        while (!(this.transform.localScale.y < .001f) && first) {
+        yield return new WaitForSeconds(.2f);
+        while (!(this.transform.localScale.y < .001f) ) {
             this.transform.localScale = this.transform.localScale * scale;
             first = true;
             yield return new WaitForSeconds(Time.deltaTime);
