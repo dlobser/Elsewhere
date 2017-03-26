@@ -43,9 +43,13 @@ public class EmitCrystals : MonoBehaviour {
                         g = Instantiate(crystals[mouse.hitObject.GetComponent<Crystalizable>().type-1]);
 
                     g.transform.position = mouse.hitPosition;
-                    g.transform.localEulerAngles = (mouse.hitNormal * Mathf.PI * 2 * 360) + (Vector3.Scale( Random.insideUnitSphere,randomRotation));
+				
+//                    g.transform.localEulerAngles = (mouse.hitNormal * Mathf.PI * 2 * 360) + (Vector3.Scale( Random.insideUnitSphere,randomRotation));
                     //g.transform.localScale = scalar;
-                    Debug.Log(g);
+//                    Debug.Log(g);
+					g.transform.LookAt(mouse.hitPosition+mouse.hitNormal);
+					g.transform.Rotate((Vector3.Scale( Random.insideUnitSphere,randomRotation)));
+						
                     StartCoroutine(scaleUp(scalar, g));
                     if (parentToTarget)
                         g.transform.SetParent(mouse.hitObject.transform);
@@ -69,7 +73,8 @@ public class EmitCrystals : MonoBehaviour {
             c.enabled = false;
         while (count < 1) {
             count += Time.deltaTime * scaleUpSpeed;
-            g.transform.localScale = Vector3.Lerp(Vector3.zero, scale, Mathf.SmoothStep(0f,1f, count));
+			if(g!=null)
+            	g.transform.localScale = Vector3.Lerp(Vector3.zero, scale, Mathf.SmoothStep(0f,1f, count));
             yield return null;
         }
         if (c != null)
