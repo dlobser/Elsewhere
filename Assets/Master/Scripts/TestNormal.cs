@@ -14,7 +14,7 @@ public class TestNormal : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (mouse.beenHit) {
+		if (ON_MouseInteraction.beenHit) {
 			pointer.transform.position = mouse.hitPosition;
 			Vector3 vec = mouse.hitPosition + ( mouse.hitNormal )  ;
 			pointer.transform.LookAt (vec);

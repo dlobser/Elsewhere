@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: f593b714745a09e40adbed133a9ca57c
+timeCreated: 1490496389
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Cabo Rounded Regular
+  fontNames:
+  - Cabo Rounded Regular
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

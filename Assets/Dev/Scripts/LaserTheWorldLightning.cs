@@ -44,7 +44,7 @@ public class LaserTheWorldLightning: MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (mouse.beenHit) {
+        if (ON_MouseInteraction.beenHit) {
             FindClosestSource();
             //Debug.Log(mouse.hitObject);
             if (source != null) {
