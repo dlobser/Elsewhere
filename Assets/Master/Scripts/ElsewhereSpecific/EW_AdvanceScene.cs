@@ -22,4 +22,5 @@ public class EW_AdvanceScene : MonoBehaviour {
 			SceneManager.LoadScene (++nextScene);
 		}
 	}
+    
 }

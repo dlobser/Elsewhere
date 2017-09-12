@@ -7,6 +7,7 @@ using UnityEngine;
 public class LaserTheWorldLightning: MonoBehaviour {
 
     public ON_MouseInteraction mouse;
+    Vector3 MousePrevHitPosition = Vector3.zero;
     public GameObject trail;
 	public AudioSource aud;
     GameObject Trail;
@@ -46,11 +47,14 @@ public class LaserTheWorldLightning: MonoBehaviour {
 	void Update () {
         if (ON_MouseInteraction.beenHit) {
             FindClosestSource();
-            //Debug.Log(mouse.hitObject);
+           
             if (source != null) {
+                //Debug.Log(mouse.hitObject);
                 if (Vector3.Distance(source.transform.position,
                     mouse.hitObject.transform.position) > 1 &&
-                    mouse.hitObject.GetComponent<EW_DontLaserMe>() == null) {
+                    mouse.hitObject.GetComponent<EW_DontLaserMe>() == null// && 
+                   // mouse.hitPosition != MousePrevHitPosition
+                    ) {
 
                     start = source.transform.position;
                     end = mouse.hitPosition;
@@ -66,6 +70,19 @@ public class LaserTheWorldLightning: MonoBehaviour {
                     Trail.GetComponent<ParticleSystem>().emissionRate = counter * particleAmount;
                     prevScale = scale;
                     aud.volume = counter;
+                   
+                   // MousePrevHitPosition = mouse.hitPosition;
+                   
+                }
+                else if (counter > 0) {
+                    counter -= Time.deltaTime * fadeSpeed;
+                    updateLine(start, end, counter * laserWidth);
+                    //            privateLazor.transform.localScale = new Vector3(counter * laserWidth, counter * laserWidth, prevScale);
+                    Trail.GetComponent<TrailRenderer>().widthMultiplier = counter * trailWidth;
+                    Trail.GetComponent<TrailRenderer>().time = counter * trailTime;
+                    Trail.GetComponent<ParticleSystem>().emissionRate = counter * particleAmount;
+                    aud.volume = counter;
+
                 }
             }
         }
@@ -77,6 +94,7 @@ public class LaserTheWorldLightning: MonoBehaviour {
             Trail.GetComponent<TrailRenderer>().time = counter * trailTime ;
             Trail.GetComponent<ParticleSystem>().emissionRate = counter * particleAmount;
 			aud.volume = counter;
+           
         }
         else {
 			lRen.widthMultiplier = 0;
