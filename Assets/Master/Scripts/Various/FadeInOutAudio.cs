@@ -39,7 +39,7 @@ public class FadeInOutAudio : MonoBehaviour {
         fadeCount = fadeSpeed;
         while (fadeCount > 0) {
             fadeCount -= Time.deltaTime;
-            Debug.Log(fadeCount);
+            //Debug.Log(fadeCount);
             AudioListener.volume = fadeCount / fadeSpeed;
 
             yield return new WaitForSeconds(Time.deltaTime);
