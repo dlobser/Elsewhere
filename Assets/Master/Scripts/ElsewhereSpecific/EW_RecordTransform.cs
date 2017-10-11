@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class EW_RecordTransform : MonoBehaviour {
 
@@ -21,6 +22,9 @@ public class EW_RecordTransform : MonoBehaviour {
     string readText;
 
 	void Start () {
+
+        SceneManager.activeSceneChanged += saveScene;
+
         position = new List<Vector3>();
         rotation = new List<Quaternion>();
         time = new List<float>();
@@ -72,7 +76,15 @@ public class EW_RecordTransform : MonoBehaviour {
     }
 
     void OnApplicationQuit() {
-        if (record) { 
+        saveScene();
+    }
+
+    void saveScene(Scene a, Scene b) {
+        saveScene();
+    }
+
+    void saveScene() {
+        if (record) {
             string pos = "";
             string rot = "";
             string tm = "";
