@@ -101,7 +101,8 @@ public class ON_MouseInteraction : MonoBehaviour {
         theHitPosition = hitPosition;
         theHitObject = hitObject;
         if (beenHit) {
-            mouseHasHit();
+            if(mouseHasHit!=null)
+                mouseHasHit();
         }
     }
 }

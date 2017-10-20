@@ -32,6 +32,7 @@ public class LaserTheWorldLightning: MonoBehaviour {
 	public float lightningJaggyness;
 	public float lightningFreq;
 	public float lightningSpeed;
+    public float lightningVolume = 1;
 
     // Use this for initialization
     void Start () {
@@ -49,30 +50,31 @@ public class LaserTheWorldLightning: MonoBehaviour {
             FindClosestSource();
            
             if (source != null) {
-                //Debug.Log(mouse.hitObject);
-                if (Vector3.Distance(source.transform.position,
-                    mouse.hitObject.transform.position) > 1 &&
-                    mouse.hitObject.GetComponent<EW_DontLaserMe>() == null// && 
-                   // mouse.hitPosition != MousePrevHitPosition
-                    ) {
+                //if (mouse.hitObject != null) {
+                    //Debug.Log(mouse.hitObject);
+                    if (Vector3.Distance(source.transform.position,
+                        mouse.hitObject.transform.position) > 1 &&
+                        mouse.hitObject.GetComponent<EW_DontLaserMe>() == null// && 
+                                                                              // mouse.hitPosition != MousePrevHitPosition
+                        ) {
 
-                    start = source.transform.position;
-                    end = mouse.hitPosition;
-                    counter = Mathf.Min(1, Mathf.Max(0, ((avgDistance - .1f))));
-                    updateLine(start, end, counter * laserWidth);
-                    //                privateLazor.transform.position = Vector3.Lerp(mouse.hitPosition, source.transform.position, .5f);
-                    //                privateLazor.transform.LookAt(source.transform.position);
-                    float scale = Vector3.Distance(source.transform.position, mouse.hitPosition);
-                    //                privateLazor.transform.localScale = new Vector3(counter * laserWidth, counter * laserWidth, prevScale);
-                    Trail.transform.position = mouse.hitPosition;
-                    Trail.GetComponent<TrailRenderer>().widthMultiplier = counter * trailWidth;
-                    Trail.GetComponent<TrailRenderer>().time = counter * trailTime;
-                    Trail.GetComponent<ParticleSystem>().emissionRate = counter * particleAmount;
-                    prevScale = scale;
-                    aud.volume = counter;
-                   
-                   // MousePrevHitPosition = mouse.hitPosition;
-                   
+                        start = source.transform.position;
+                        end = mouse.hitPosition;
+                        counter = Mathf.Min(1, Mathf.Max(0, ((avgDistance - .1f))));
+                        updateLine(start, end, counter * laserWidth);
+                        //                privateLazor.transform.position = Vector3.Lerp(mouse.hitPosition, source.transform.position, .5f);
+                        //                privateLazor.transform.LookAt(source.transform.position);
+                        float scale = Vector3.Distance(source.transform.position, mouse.hitPosition);
+                        //                privateLazor.transform.localScale = new Vector3(counter * laserWidth, counter * laserWidth, prevScale);
+                        Trail.transform.position = mouse.hitPosition;
+                        Trail.GetComponent<TrailRenderer>().widthMultiplier = counter * trailWidth;
+                        Trail.GetComponent<TrailRenderer>().time = counter * trailTime;
+                        Trail.GetComponent<ParticleSystem>().emissionRate = counter * particleAmount;
+                        prevScale = scale;
+                        aud.volume = counter * lightningVolume;
+
+                        // MousePrevHitPosition = mouse.hitPosition;
+                    //}
                 }
                 else if (counter > 0) {
                     counter -= Time.deltaTime * fadeSpeed;
@@ -81,7 +83,7 @@ public class LaserTheWorldLightning: MonoBehaviour {
                     Trail.GetComponent<TrailRenderer>().widthMultiplier = counter * trailWidth;
                     Trail.GetComponent<TrailRenderer>().time = counter * trailTime;
                     Trail.GetComponent<ParticleSystem>().emissionRate = counter * particleAmount;
-                    aud.volume = counter;
+                    aud.volume = counter * lightningVolume; ;
 
                 }
             }
@@ -93,14 +95,14 @@ public class LaserTheWorldLightning: MonoBehaviour {
             Trail.GetComponent<TrailRenderer>().widthMultiplier = counter * trailWidth;
             Trail.GetComponent<TrailRenderer>().time = counter * trailTime ;
             Trail.GetComponent<ParticleSystem>().emissionRate = counter * particleAmount;
-			aud.volume = counter;
-           
+			aud.volume = counter * lightningVolume;
+
         }
         else {
 			lRen.widthMultiplier = 0;
 //            privateLazor.transform.position = init;
             prevScale = 0;
-			aud.volume = 0;
+			aud.volume = 0 * lightningVolume;
         }
 
       
