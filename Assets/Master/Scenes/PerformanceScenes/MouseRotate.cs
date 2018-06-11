@@ -15,13 +15,17 @@ public class MouseRotate : MonoBehaviour {
     }
 
     void Update() {
+        if (Input.GetKeyDown(KeyCode.Period))
+            mouseSensitivity *= 2;
+        if (Input.GetKeyDown(KeyCode.Comma))
+            mouseSensitivity *= .5f;
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = -Input.GetAxis("Mouse Y");
 
         rotY += mouseX * mouseSensitivity * Time.deltaTime;
         rotX += mouseY * mouseSensitivity * Time.deltaTime;
 
-        rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
+        //rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
 
         Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
         transform.rotation = localRotation;
